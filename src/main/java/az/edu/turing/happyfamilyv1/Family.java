@@ -1,6 +1,7 @@
 package az.edu.turing.happyfamilyv1;
 
 public class Family {
+
     private Human mother;
     private Human father;
     private Human children;
