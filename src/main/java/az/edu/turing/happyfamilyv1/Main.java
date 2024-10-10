@@ -7,16 +7,17 @@ public class Main {
         Pet pet2 = new Pet("cat", "Poke");
         Pet pet3 = new Pet("eager", "Nomi", 7, 61, new String[]{"fly", "eat"});
 
-       System.out.println(pet1);
+        System.out.println(pet1);
         System.out.println(pet2);
         System.out.println(pet3);
 
         Human mother = new Human("Marry", "Karlene", 1976);
         Human father = new Human("Tom", "Karlene", 1971);
-        Human child = new Human("Kevin", "Karlene", 2004, 90, pet3, mother, father, new String[][]{
+        Human child = new Human("Kevin", "Karlene", 2004, 90, new Family(mother, father, new Human[3]), new String[][]{
                 {"Monday", "Go to work"},
                 {"Tuesday", "Go to school"},
         });
+
 
         System.out.println(child);
 

@@ -9,9 +9,7 @@ public class Human {
     private String surname;
     private int birthYear;
     private int iq;
-    private Pet pet;
-    private Human mother;
-    private Human father;
+    private Family family;
     private String[][] schedule;
 
     public Human() {
@@ -23,22 +21,12 @@ public class Human {
         this.birthYear = birthYear;
     }
 
-    public Human(String name, String surname, int birthYear, Human mother, Human father) {
-        this.name = name;
-        this.surname = surname;
-        this.birthYear = birthYear;
-        this.mother = mother;
-        this.father = father;
-    }
-
-    public Human(String name, String surname, int birthYear, int iq, Pet pet, Human mother, Human father, String[][] schedule) {
+    public Human(String name, String surname, int birthYear, int iq, Family family, String[][] schedule) {
         this.name = name;
         this.surname = surname;
         this.birthYear = birthYear;
         this.iq = iq;
-        this.pet = pet;
-        this.mother = mother;
-        this.father = father;
+        this.family = family;
         this.schedule = schedule;
     }
 
@@ -74,28 +62,12 @@ public class Human {
         this.iq = iq;
     }
 
-    public Pet getPet() {
-        return pet;
+    public Family getFamily() {
+        return family;
     }
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
+    public void setFamily(Family family) {
+        this.family = family;
     }
 
     public String[][] getSchedule() {
@@ -107,41 +79,27 @@ public class Human {
     }
 
     public void greetPet() {
-        System.out.println("Hello, " + this.pet.getNickname());
+        if (family != null && family.getPet() != null) {
+            System.out.println("Hello, " + family.getPet().getNickname());
+        }
     }
 
     public void describePet() {
-        String slyness = this.pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
-        System.out.println("I have a " + this.pet.getSpecies() + ", he is " + this.pet.getAge() + " years old, he is " + slyness);
+        if (family != null && family.getPet() != null) {
+            String slyness = family.getPet().getTrickLevel() > 50 ? "very sly" : "almost not sly";
+            System.out.println("I have a " + family.getPet().getSpecies() + ", he is " + family.getPet().getAge() + " years old, he is " + slyness);
+        }
     }
 
     @Override
     public String toString() {
-        if (this.pet != null) {
-            return "Human{" +
-                    "name='" + name + '\'' +
-                    ", surname='" + surname + '\'' +
-                    ", year=" + birthYear +
-                    ", iq=" + iq +
-                    ", mother=" + mother +
-                    ", father=" + father +
-                    ", pet=" + pet.getSpecies() + '{' +
-                    "nickname='" + pet.getNickname() + '\'' +
-                    ", age=" + pet.getAge() +
-                    ", trickLevel=" + pet.getTrickLevel() +
-                    ", habits=" + Arrays.toString(pet.getHabits()) +
-                    '}';
-        }
-        else {
-            return "Human{" +
-                    "name='" + name + '\'' +
-                    ", surname='" + surname + '\'' +
-                    ", year=" + birthYear +
-                    ", iq=" + iq +
-                    ", mother=" + mother +
-                    ", father=" + father + '}';
-        }
-
+        return "Human{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", year=" + birthYear +
+                ", iq=" + iq +
+                ", schedule=" + Arrays.deepToString(schedule) +
+                '}';
     }
 
     @Override
@@ -149,13 +107,11 @@ public class Human {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return birthYear == human.birthYear && iq == human.iq && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(pet, human.pet) && Objects.equals(mother, human.mother) && Objects.equals(father, human.father) && Arrays.equals(schedule, human.schedule);
+        return birthYear == human.birthYear && iq == human.iq && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(family, human.family) && Objects.deepEquals(schedule, human.schedule);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(name, surname, birthYear, iq, pet, mother, father);
-        result = 31 * result + Arrays.hashCode(schedule);
-        return result;
+        return Objects.hash(name, surname, birthYear, iq, family, Arrays.deepHashCode(schedule));
     }
 }

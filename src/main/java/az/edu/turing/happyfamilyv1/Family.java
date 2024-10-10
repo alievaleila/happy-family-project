@@ -56,6 +56,35 @@ public class Family {
         }
     }
 
+    public boolean deleteChild(int index) {
+        if (index >= 0 && index < children.length) {
+            Human[] newChildren = new Human[children.length - 1];
+            for (int i = 0, j = 0; i < children.length; i++) {
+                if (i != index) {
+                    newChildren[j++] = children[i];
+                }
+            }
+            children = newChildren;
+            return true;
+        }
+        return false;
+    }
+
+    public void addChild(Human child) {
+        if (children == null) {
+            children = new Human[]{child};
+        } else {
+            Human[] newChildren = Arrays.copyOf(children, children.length + 1);
+            newChildren[newChildren.length - 1] = child;
+            children = newChildren;
+        }
+        child.setFamily(this);
+    }
+
+    public int countFamily() {
+        return 2 + (children != null ? children.length : 0);
+    }
+
 
     @Override
     public String toString() {
@@ -72,13 +101,11 @@ public class Family {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Family family = (Family) o;
-        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Arrays.equals(children, family.children) && Objects.equals(pet, family.pet);
+        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Objects.deepEquals(children, family.children) && Objects.equals(pet, family.pet);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(mother, father, pet);
-        result = 31 * result + Arrays.hashCode(children);
-        return result;
+        return Objects.hash(mother, father, Arrays.hashCode(children), pet);
     }
 }
