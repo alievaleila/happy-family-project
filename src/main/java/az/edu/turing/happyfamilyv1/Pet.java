@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Pet {
 
-    private String species;
+    private Species species;
     private String nickname;
     private int age;
     private int trickLevel;
@@ -16,24 +16,24 @@ public class Pet {
     }
 
     public Pet(String species, String nickname) {
-        this.species = species;
+        this.species = Species.valueOf(species);
         this.nickname = nickname;
     }
 
     public Pet(String species, String nickname, int age, int trickLevel, String[] habits) {
-        this.species = species;
+        this.species = Species.valueOf(species);
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
         this.habits = habits;
     }
 
-    public String getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
     public void setSpecies(String species) {
-        this.species = species;
+        this.species = Species.valueOf(species);
     }
 
     public String getNickname() {
@@ -81,8 +81,17 @@ public class Pet {
     }
 
     @Override
+    protected void finalize() throws Throwable {
+        try {
+            System.out.println("Pet " + nickname + " of species " + species + " is being removed.");
+        } finally {
+            super.finalize();
+        }
+    }
+
+    @Override
     public String toString() {
-        return species + '{' +
+        return species.name() + '{' +
                 "nickname='" + nickname + '\'' +
                 ", age=" + age +
                 ", trickLevel=" + trickLevel +

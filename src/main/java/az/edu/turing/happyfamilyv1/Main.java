@@ -11,6 +11,10 @@ public class Main {
         System.out.println(pet2);
         System.out.println(pet3);
 
+        System.out.println("111");
+        System.out.println(pet1.getSpecies());
+
+
         Human mother = new Human("Marry", "Karlene", 1976);
         Human father = new Human("Tom", "Karlene", 1971);
         Human child = new Human("Kevin", "Karlene", 2004, 90, new Family(mother, father, new Human[3]), new String[][]{
@@ -26,5 +30,28 @@ public class Main {
         pet3.eat();
         pet3.respond();
         pet3.foul();
+
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        long freeMemory;
+
+        int count = 0;
+        while (true) {
+            Human human = new Human();
+
+            count++;
+
+            freeMemory = Runtime.getRuntime().freeMemory();
+
+            if (count % 1000 == 0) {
+                System.out.println("Created " + count + " Human objects. Free memory: " + freeMemory / (1024 * 1024) + " MB");
+            }
+
+            if (freeMemory < maxMemory * 0.1) {
+                System.out.println("Memory limit reached. Stopping object creation.");
+                break;
+            }
+        }
+
+
     }
 }

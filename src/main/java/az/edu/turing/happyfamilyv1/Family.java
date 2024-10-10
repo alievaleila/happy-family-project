@@ -85,6 +85,14 @@ public class Family {
         return 2 + (children != null ? children.length : 0);
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            System.out.println("Family object is being removed.");
+        } finally {
+            super.finalize();
+        }
+    }
 
     @Override
     public String toString() {
