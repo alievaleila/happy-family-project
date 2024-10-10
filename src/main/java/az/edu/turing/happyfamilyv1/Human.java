@@ -1,6 +1,7 @@
 package az.edu.turing.happyfamilyv1;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Human {
 
@@ -141,5 +142,20 @@ public class Human {
                     ", father=" + father + '}';
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return birthYear == human.birthYear && iq == human.iq && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(pet, human.pet) && Objects.equals(mother, human.mother) && Objects.equals(father, human.father) && Arrays.equals(schedule, human.schedule);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, surname, birthYear, iq, pet, mother, father);
+        result = 31 * result + Arrays.hashCode(schedule);
+        return result;
     }
 }
