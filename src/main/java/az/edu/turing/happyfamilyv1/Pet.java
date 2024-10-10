@@ -1,6 +1,7 @@
 package az.edu.turing.happyfamilyv1;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Pet {
 
@@ -88,5 +89,20 @@ public class Pet {
                 ", trickLevel=" + trickLevel +
                 ", habits=" + Arrays.toString(habits) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return age == pet.age && trickLevel == pet.trickLevel && Objects.equals(species, pet.species) && Objects.equals(nickname, pet.nickname) && Arrays.equals(habits, pet.habits);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(species, nickname, age, trickLevel);
+        result = 31 * result + Arrays.hashCode(habits);
+        return result;
     }
 }
