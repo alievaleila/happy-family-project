@@ -116,15 +116,30 @@ public class Human {
 
     @Override
     public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birthYear=" + birthYear +
-                ", iq=" + iq +
-                ", pet=" + pet +
-                ", mother=" + mother +
-                ", father=" + father +
-                ", schedule=" + Arrays.toString(schedule) +
-                '}';
+        if (this.pet != null) {
+            return "Human{" +
+                    "name='" + name + '\'' +
+                    ", surname='" + surname + '\'' +
+                    ", year=" + birthYear +
+                    ", iq=" + iq +
+                    ", mother=" + mother +
+                    ", father=" + father +
+                    ", pet=" + pet.getSpecies() + '{' +
+                    "nickname='" + pet.getNickname() + '\'' +
+                    ", age=" + pet.getAge() +
+                    ", trickLevel=" + pet.getTrickLevel() +
+                    ", habits=" + Arrays.toString(pet.getHabits()) +
+                    '}';
+        }
+        else {
+            return "Human{" +
+                    "name='" + name + '\'' +
+                    ", surname='" + surname + '\'' +
+                    ", year=" + birthYear +
+                    ", iq=" + iq +
+                    ", mother=" + mother +
+                    ", father=" + father + '}';
+        }
+
     }
 }
