@@ -22,6 +22,16 @@ public class Main {
                 {"Tuesday", "Go to school"},
         });
 
+        String[][] schedule = {
+                {DayOfWeek.MONDAY.name(), "Go to work"},
+                {DayOfWeek.TUESDAY.name(), "Go to school"},
+                {DayOfWeek.WEDNESDAY.name(), "Go shopping"},
+                {DayOfWeek.THURSDAY.name(), "Go to gym"},
+                {DayOfWeek.FRIDAY.name(), "Family time"},
+                {DayOfWeek.SATURDAY.name(), "Relax"},
+                {DayOfWeek.SUNDAY.name(), "Prepare for the week"}
+        };
+
 
         System.out.println(child);
 
