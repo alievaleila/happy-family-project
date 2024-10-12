@@ -3,7 +3,7 @@ package az.edu.turing.happyfamilyv1;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Pet {
+public abstract class Pet {
 
     private Species species;
     private String nickname;
@@ -30,10 +30,6 @@ public class Pet {
 
     public Species getSpecies() {
         return species;
-    }
-
-    public void setSpecies(String species) {
-        this.species = Species.valueOf(species);
     }
 
     public String getNickname() {
@@ -76,14 +72,16 @@ public class Pet {
         System.out.println("Hello, owner. I am -" + this.nickname + ". I miss you!");
     }
 
-    public void foul() {
-        System.out.println("I need to cover it up");
-    }
+//    public void foul() {
+//        System.out.println("I need to cover it up");
+//    }
 
+    @Deprecated
+    @SuppressWarnings("removal")
     @Override
-    protected void finalize() throws Throwable {
+    public void finalize() throws Throwable {
         try {
-            System.out.println("Pet " + nickname + " of species " + species + " is being removed.");
+            System.out.println("Family object is being removed.");
         } finally {
             super.finalize();
         }
@@ -111,4 +109,5 @@ public class Pet {
     public int hashCode() {
         return Objects.hash(species, nickname, age, trickLevel, Arrays.hashCode(habits));
     }
+
 }

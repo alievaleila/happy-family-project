@@ -7,7 +7,7 @@ public enum Species {
     FISH,
     REPTILE,
     HAMSTER,
-    RABBIT
-
-
+    RABBIT,
+    ROBOCAT,
+    UNKNOWN;
 }
