@@ -3,7 +3,8 @@ package az.edu.turing.happyfamilyv1;
 public class Main {
 
     public static void main(String[] args) {
-        Pet pet1 = new Pet();
+
+        Pet pet1 = new Pet(Species.DOG, "Rock", 3, 55, new String[]{"eat", "drink", "sleep"});
         Pet pet2 = new Pet("cat", "Poke");
         Pet pet3 = new Pet("eager", "Nomi", 7, 61, new String[]{"fly", "eat"});
 
@@ -21,6 +22,16 @@ public class Main {
                 {"Monday", "Go to work"},
                 {"Tuesday", "Go to school"},
         });
+
+        String[][] schedule = {
+                {DayOfWeek.MONDAY.name(), "Go to work"},
+                {DayOfWeek.TUESDAY.name(), "Go to school"},
+                {DayOfWeek.WEDNESDAY.name(), "Go shopping"},
+                {DayOfWeek.THURSDAY.name(), "Go to gym"},
+                {DayOfWeek.FRIDAY.name(), "Family time"},
+                {DayOfWeek.SATURDAY.name(), "Relax"},
+                {DayOfWeek.SUNDAY.name(), "Prepare for the week"}
+        };
 
 
         System.out.println(child);
