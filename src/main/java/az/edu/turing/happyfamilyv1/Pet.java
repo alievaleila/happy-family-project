@@ -15,21 +15,21 @@ public abstract class Pet {
 
     }
 
-    public Pet(String species, String nickname) {
-        this.species = Species.valueOf(species);
-        this.nickname = nickname;
-    }
-
-    public Pet(String species, String nickname, int age, int trickLevel, String[] habits) {
-        this.species = Species.valueOf(species);
+    public Pet(Species species, String nickname, int age, int trickLevel, String[] habits) {
+        this.species = species;
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
         this.habits = habits;
     }
 
+
     public Species getSpecies() {
         return species;
+    }
+
+    public void setSpecies(Species species) {
+        this.species = species;
     }
 
     public String getNickname() {
@@ -68,13 +68,8 @@ public abstract class Pet {
         System.out.println("I'm eating");
     }
 
-    public void respond() {
-        System.out.println("Hello, owner. I am -" + this.nickname + ". I miss you!");
-    }
+    public abstract void respond();
 
-//    public void foul() {
-//        System.out.println("I need to cover it up");
-//    }
 
     @Deprecated
     @SuppressWarnings("removal")
@@ -89,7 +84,7 @@ public abstract class Pet {
 
     @Override
     public String toString() {
-        return species.name() + '{' +
+        return "Pet{" +
                 "nickname='" + nickname + '\'' +
                 ", age=" + age +
                 ", trickLevel=" + trickLevel +
@@ -102,12 +97,11 @@ public abstract class Pet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return age == pet.age && trickLevel == pet.trickLevel && Objects.equals(species, pet.species) && Objects.equals(nickname, pet.nickname) && Objects.deepEquals(habits, pet.habits);
+        return age == pet.age && trickLevel == pet.trickLevel && species == pet.species && Objects.equals(nickname, pet.nickname) && Objects.deepEquals(habits, pet.habits);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(species, nickname, age, trickLevel, Arrays.hashCode(habits));
+        return Objects.hash(nickname, age, trickLevel);
     }
-
 }

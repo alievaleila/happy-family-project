@@ -27,7 +27,6 @@ public class FamilyTest {
         father = new Human("Jack", "London", 1972);
         child1 = new Human("Martin", "Eden", 2000);
         child2 = new Human("Fyodor", "Dostoyevski", 2010);
-        pet = new Pet(Species.DOG, "Rock", 3, 55, new String[]{"eat", "drink", "sleep"});
         family = new Family(mother, father, new Human[]{child1, child2});
         family.setPet(pet);
     }
