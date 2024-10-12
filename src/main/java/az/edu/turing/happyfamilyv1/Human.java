@@ -91,8 +91,10 @@ public class Human {
         }
     }
 
+    @Deprecated
+    @SuppressWarnings("removal")
     @Override
-    protected void finalize() throws Throwable {
+    public void finalize() throws Throwable {
         try {
             System.out.println("Family object is being removed.");
         } finally {
@@ -102,13 +104,7 @@ public class Human {
 
     @Override
     public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", year=" + birthYear +
-                ", iq=" + iq +
-                ", schedule=" + Arrays.deepToString(schedule) +
-                '}';
+        return "Human{" + "name='" + name + '\'' + ", surname='" + surname + '\'' + ", year=" + birthYear + ", iq=" + iq + ", schedule=" + Arrays.deepToString(schedule) + '}';
     }
 
     @Override
