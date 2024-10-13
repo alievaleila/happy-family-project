@@ -1,8 +1,5 @@
 package az.edu.turing.happyfamilyv1;
 
-import java.util.Arrays;
-import java.util.Objects;
-
 public class Human {
 
     private String name;
@@ -10,7 +7,6 @@ public class Human {
     private int birthYear;
     private int iq;
     private Family family;
-    private String[][] schedule;
 
     public Human() {
     }
@@ -21,13 +17,13 @@ public class Human {
         this.birthYear = birthYear;
     }
 
-    public Human(String name, String surname, int birthYear, int iq, Family family, String[][] schedule) {
+    public Human(String name, String surname, int birthYear, int iq, Family family) {
         this.name = name;
         this.surname = surname;
         this.birthYear = birthYear;
         this.iq = iq;
         this.family = family;
-        this.schedule = schedule;
+
     }
 
     public String getName() {
@@ -70,13 +66,6 @@ public class Human {
         this.family = family;
     }
 
-    public String[][] getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(String[][] schedule) {
-        this.schedule = schedule;
-    }
 
     public void greetPet() {
         if (family != null && family.getPet() != null) {
@@ -104,19 +93,12 @@ public class Human {
 
     @Override
     public String toString() {
-        return "Human{" + "name='" + name + '\'' + ", surname='" + surname + '\'' + ", year=" + birthYear + ", iq=" + iq + ", schedule=" + Arrays.deepToString(schedule) + '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Human human = (Human) o;
-        return birthYear == human.birthYear && iq == human.iq && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(family, human.family) && Objects.deepEquals(schedule, human.schedule);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, surname, birthYear, iq, family, Arrays.deepHashCode(schedule));
+        return "Human{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthYear=" + birthYear +
+                ", iq=" + iq +
+                ", family=" + family +
+                '}';
     }
 }

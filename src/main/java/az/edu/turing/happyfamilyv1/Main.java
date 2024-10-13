@@ -3,76 +3,34 @@ package az.edu.turing.happyfamilyv1;
 public class Main {
 
     public static void main(String[] args) {
-        Pet pet1 = new Fish("Alice");
-        Pet pet2 = new DomesticCat( "Poke");
-        Pet pet3 = new RoboCat("R2-D2", 5, 80, new String[]{"beep", "boop"});
-
-        System.out.println(pet1);
-        System.out.println(pet2);
-        System.out.println(pet3);
-
-        System.out.println("111");
-        System.out.println(pet1.getSpecies());
 
 
-        Human mother = new Woman("Marry", "Karlene", 1976);
-        Human father = new Man("Tom", "Karlene", 1971);
-        Human child = new Human("Kevin", "Karlene", 2004, 90, new Family(mother, father, new Human[3]), new String[][]{
-                {"Monday", "Go to work"},
-                {"Tuesday", "Go to school"},
-        });
+        Pet dog = new Dog("Buddy", 5, 80, new String[]{"run", "fetch"});
+        Pet cat = new DomesticCat("Whiskers", 3, 70, new String[]{"sleep", "scratch"});
+        Pet roboCat = new RoboCat("Tom", 1, 90, new String[]{"beep", "scan"});
+        Pet fish = new Fish("Nemo", 2, 30, new String[]{"swim", "hide"});
 
-        String[][] schedule = {
-                {DayOfWeek.MONDAY.name(), "Go to work"},
-                {DayOfWeek.TUESDAY.name(), "Go to school"},
-                {DayOfWeek.WEDNESDAY.name(), "Go shopping"},
-                {DayOfWeek.THURSDAY.name(), "Go to gym"},
-                {DayOfWeek.FRIDAY.name(), "Family time"},
-                {DayOfWeek.SATURDAY.name(), "Relax"},
-                {DayOfWeek.SUNDAY.name(), "Prepare for the week"}
-        };
+        System.out.println(dog);
+        System.out.println(cat);
+        System.out.println(roboCat);
+        System.out.println(fish);
 
+        Man man = new Man("John", "Doe", 1985);
+        Woman woman = new Woman("Jane", "Doe", 1990);
 
-        System.out.println(child);
+        Family family = new Family(man, woman, new Human[0]);
+        family.setPet(dog);
 
-        child.greetPet();
+        man.setFamily(family);
+        woman.setFamily(family);
 
-        if (child.getFamily().getPet() != null) {
-            child.getFamily().getPet().respond();
-            if (child.getFamily().getPet() instanceof Foul) {
-                ((Foul) child.getFamily().getPet()).foul();
-            }
-        }
+        man.greetPet();
+        man.repairCar();
 
-        child.describePet();
-        pet3.eat();
-        pet3.respond();
-        ((Foul) pet3).foul();
-//        if (pet3 instanceof Foul) {
-//            ((Foul) pet3).foul();
-//        }
+        woman.greetPet();
+        woman.makeup();
 
-        long maxMemory = Runtime.getRuntime().maxMemory();
-        long freeMemory;
-
-        int count = 0;
-        while (true) {
-            Human human = new Human();
-
-            count++;
-
-            freeMemory = Runtime.getRuntime().freeMemory();
-
-            if (count % 1000 == 0) {
-                System.out.println("Created " + count + " Human objects. Free memory: " + freeMemory / (1024 * 1024) + " MB");
-            }
-
-            if (freeMemory < maxMemory * 0.1) {
-                System.out.println("Memory limit reached. Stopping object creation.");
-                break;
-            }
-        }
-
-
+        dog.respond();
+        ((Foul) dog).foul();
     }
 }

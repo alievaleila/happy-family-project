@@ -2,12 +2,9 @@ package az.edu.turing.happyfamilyv1;
 
 public class DomesticCat extends Pet implements Foul {
 
-    public DomesticCat(String nickname) {
-        super("CAT", nickname);
-    }
+    public DomesticCat(String nickname,int age,int trickLevel,String [] habits) {
+        super(Species.DOMESTIC_CAT,nickname,age,trickLevel,habits);
 
-    public DomesticCat(String nickname, int age, int trickLevel, String[] habits) {
-        super("CAT", nickname, age, trickLevel, habits);
     }
 
     @Override
@@ -17,7 +14,7 @@ public class DomesticCat extends Pet implements Foul {
 
     @Override
     public void foul() {
-        System.out.println("DomesticCat " + getNickname() + " has fouled.");
+        System.out.println("I scratched the sofa!");
     }
 }
 
