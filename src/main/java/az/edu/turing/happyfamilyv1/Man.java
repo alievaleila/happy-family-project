@@ -8,10 +8,16 @@ public class Man extends Human {
 
     @Override
     public void greetPet() {
-        if (getFamily() != null && getFamily().getPet() != null) {
-            System.out.println("Hello, " + getFamily().getPet().getNickname() + "! Time to go for a walk.");
+        if (getFamily() != null && !getFamily().getPets().isEmpty()) {
+            for (Object obj : getFamily().getPets()) {
+                if (obj instanceof Pet) {
+                    Pet pet = (Pet) obj; // Type casting to Pet
+                    System.out.println("Hello, " + pet.getNickname() + "! Time to go for a walk.");
+                }
+            }
         }
     }
+
     public void repairCar() {
         System.out.println(getName() + " is repairing the car.");
     }

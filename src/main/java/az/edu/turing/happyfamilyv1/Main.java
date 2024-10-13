@@ -1,5 +1,8 @@
 package az.edu.turing.happyfamilyv1;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -18,8 +21,13 @@ public class Main {
         Man man = new Man("John", "Doe", 1985);
         Woman woman = new Woman("Jane", "Doe", 1990);
 
-        Family family = new Family(man, woman, new Human[0]);
-        family.setPet(dog);
+        Family family = new Family(man, woman);
+        Set<Pet> pets = new HashSet<>();
+        pets.add(dog);
+        pets.add(cat);
+
+        family.setPet(pets);
+
 
         man.setFamily(family);
         woman.setFamily(family);

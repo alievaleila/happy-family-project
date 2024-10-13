@@ -1,7 +1,9 @@
 package az.edu.turing.happyfamilyv1;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public abstract class Pet {
 
@@ -9,18 +11,24 @@ public abstract class Pet {
     private String nickname;
     private int age;
     private int trickLevel;
-    private String[] habits;
+    private Set<String> habits;
 
     public Pet() {
-
+        habits = new HashSet<>();
     }
+
 
     public Pet(Species species, String nickname, int age, int trickLevel, String[] habits) {
         this.species = species;
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
-        this.habits = habits;
+        this.habits = new HashSet<>();
+        if (habits != null) {
+            for (String habit : habits) {
+                this.habits.add(habit);
+            }
+        }
     }
 
 
@@ -56,12 +64,17 @@ public abstract class Pet {
         this.trickLevel = trickLevel;
     }
 
-    public String[] getHabits() {
+    public Set<String> getHabits() {
         return habits;
     }
 
-    public void setHabits(String[] habits) {
+    public void setHabits(Set<String> habits) {
         this.habits = habits;
+    }
+
+    public void addHabit(String habit) {
+        habits.add(habits.toString());
+
     }
 
     public void eat() {
@@ -88,7 +101,7 @@ public abstract class Pet {
                 "nickname='" + nickname + '\'' +
                 ", age=" + age +
                 ", trickLevel=" + trickLevel +
-                ", habits=" + Arrays.toString(habits) +
+                ", habits=" + habits +
                 '}';
     }
 
@@ -97,11 +110,15 @@ public abstract class Pet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return age == pet.age && trickLevel == pet.trickLevel && species == pet.species && Objects.equals(nickname, pet.nickname) && Objects.deepEquals(habits, pet.habits);
+        return age == pet.age &&
+                trickLevel == pet.trickLevel &&
+                species == pet.species &&
+                Objects.equals(nickname, pet.nickname) &&
+                Objects.equals(habits, pet.habits);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nickname, age, trickLevel);
+        return Objects.hash(nickname, age, trickLevel, habits);
     }
 }

@@ -1,5 +1,10 @@
 package az.edu.turing.happyfamilyv1;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class Human {
 
     private String name;
@@ -7,14 +12,17 @@ public class Human {
     private int birthYear;
     private int iq;
     private Family family;
+    Map<String, String> schedule;
 
     public Human() {
+        schedule = new HashMap<>();
     }
 
     public Human(String name, String surname, int birthYear) {
         this.name = name;
         this.surname = surname;
         this.birthYear = birthYear;
+        schedule = new HashMap<>();
     }
 
     public Human(String name, String surname, int birthYear, int iq, Family family) {
@@ -23,6 +31,7 @@ public class Human {
         this.birthYear = birthYear;
         this.iq = iq;
         this.family = family;
+        schedule = new HashMap<>();
 
     }
 
@@ -66,24 +75,46 @@ public class Human {
         this.family = family;
     }
 
+    public Map<String, String> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Map<String, String> schedule) {
+        this.schedule = schedule;
+    }
+
+    public void addSchedule(String day, String activity) {
+        schedule.put(day, activity);
+    }
 
     public void greetPet() {
-        if (family != null && family.getPet() != null) {
-            System.out.println("Hello, " + family.getPet().getNickname());
+        if (family != null && family.getPets() != null) {
+            for (Object obj : family.getPets()) {
+                if (obj instanceof Pet) {
+                    Pet pet = (Pet) obj;
+                    System.out.println("Hello, " + pet.getNickname());
+                }
+            }
         }
     }
 
     public void describePet() {
-        if (family != null && family.getPet() != null) {
-            String slyness = family.getPet().getTrickLevel() > 50 ? "very sly" : "almost not sly";
-            System.out.println("I have a " + family.getPet().getSpecies() + ", he is " + family.getPet().getAge() + " years old, he is " + slyness);
+        if (family != null && !family.getPets().isEmpty()) {
+            for (Object obj : family.getPets()) {
+                if (obj instanceof Pet) {
+                    Pet pet = (Pet) obj; // Type casting to Pet
+                    String slyness = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
+                    System.out.println("I have a " + pet.getSpecies().toString().toLowerCase() +
+                            ", he is " + pet.getAge() + " years old, he is " + slyness);
+                }
+            }
         }
     }
 
     @Deprecated
     @SuppressWarnings("removal")
     @Override
-    public void finalize() throws Throwable {
+    protected void finalize() throws Throwable {
         try {
             System.out.println("Family object is being removed.");
         } finally {
