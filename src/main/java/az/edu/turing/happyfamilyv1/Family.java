@@ -1,19 +1,21 @@
 package az.edu.turing.happyfamilyv1;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 public class Family {
 
+
     private Human mother;
     private Human father;
-    private Human[] children;
-    private Pet pet;
+    private List<Human> children;
+    private Set<Pet> pet;
+    private final HashSet<Object> pets;
 
-    public Family(Human mother, Human father, Human[] children) {
+    public Family(Human mother, Human father) {
         this.mother = mother;
         this.father = father;
-        this.children = children;
+        this.children = new ArrayList<>();
+        this.pets = new HashSet<>();
     }
 
     public Human getMother() {
@@ -32,77 +34,70 @@ public class Family {
         this.father = father;
     }
 
-    public Human[] getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
-    public void setChildren(Human[] children) {
+    public void setChildren(List<Human> children) {
         this.children = children;
     }
 
-    public Pet getPet() {
+    public Set<Pet> getPet() {
         return pet;
     }
 
-    public void setPet(Pet pet) {
+    public void setPet(Set<Pet> pet) {
         this.pet = pet;
     }
 
-    public void deleteChild(Human child) {
-        if (children != null) {
-            children = Arrays.stream(children)
-                    .filter(c -> !c.equals(child))
-                    .toArray(Human[]::new);
-        }
+    public HashSet<Object> getPets() {
+        return pets;
+    }
+
+    public boolean deleteChild(Human child) {
+        return children.remove(child);
     }
 
     public boolean deleteChild(int index) {
-        if (index >= 0 && index < children.length) {
-            Human[] newChildren = new Human[children.length - 1];
-            for (int i = 0, j = 0; i < children.length; i++) {
-                if (i != index) {
-                    newChildren[j++] = children[i];
-                }
-            }
-            children = newChildren;
+        if (index >= 0 && index < children.size()) {
+            children.remove(index);
             return true;
         }
         return false;
     }
 
     public void addChild(Human child) {
-        if (children == null) {
-            children = new Human[]{child};
-        } else {
-            Human[] newChildren = Arrays.copyOf(children, children.length + 1);
-            newChildren[newChildren.length - 1] = child;
-            children = newChildren;
-        }
+        children.add(child);
         child.setFamily(this);
     }
 
-    public int countFamily() {
-        return 2 + (children != null ? children.length : 0);
+    public void addPet(Pet pet) {
+        pets.add(pet);
     }
 
+    public int countFamily() {
+        return 2 + children.size();
+    }
+
+    @Override
     @Deprecated
     @SuppressWarnings("removal")
-    @Override
-    public void finalize() throws Throwable {
+    protected void finalize() throws Throwable {
         try {
-            System.out.println("Family object is being removed.");
+            System.out.println("Human object is being removed." + this);
         } finally {
             super.finalize();
         }
     }
+
 
     @Override
     public String toString() {
         return "Family{" +
                 "mother=" + mother +
                 ", father=" + father +
-                ", children=" + Arrays.toString(children) +
-                ", pet=" + pet +
+                ", children=" + children +
+                ", pets=" + pet +
                 '}';
     }
 
@@ -116,6 +111,6 @@ public class Family {
 
     @Override
     public int hashCode() {
-        return Objects.hash(mother, father, Arrays.hashCode(children), pet);
+        return Objects.hash(mother, father, children, pets);
     }
 }
