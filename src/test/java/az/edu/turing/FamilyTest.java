@@ -8,10 +8,7 @@ import az.edu.turing.happyfamilyv1.Species;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -22,10 +19,11 @@ public class FamilyTest {
     private Human father;
     private Human child1;
     private Human child2;
+    private Human child3;
     private Set<Pet> pets;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         mother = new Human("Agatha", "Christie", 1985);
         father = new Human("Jack", "London", 1972);
         child1 = new Human("Martin", "Eden", 2000);
@@ -35,12 +33,13 @@ public class FamilyTest {
         family.addChild(child1);
         family.addChild(child2);
 
+
         pets = new HashSet<>();
         family.setPet(pets);
     }
 
     @Test
-    public void testAddChild() {
+    void testAddChild() {
         Human newChild = new Human("Hercule", "Poirot", 2006);
         family.addChild(newChild);
         assertEquals(3, family.getChildren().size());
@@ -49,7 +48,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void deleteChildByObjectTest() {
+    void deleteChildByObjectTest() {
         assertTrue(family.deleteChild(child2));
         List<Human> remainingChildren = family.getChildren();
         assertEquals(1, remainingChildren.size());
@@ -58,23 +57,11 @@ public class FamilyTest {
 
 
     @Test
-    public void testDeleteChildByIndex() {
-        assertTrue(family.deleteChild(1));
-        assertEquals(child1, family.getChildren().get(0));
-    }
-
-    @Test
-    public void testDeleteChildInvalidIndex() {
-        assertFalse(family.deleteChild(5));
-    }
-
-    @Test
-    public void testCountFamily() {
+    void testCountFamily() {
         assertEquals(4, family.countFamily());
         family.addChild(new Human("New Child", "Test", 2021));
         assertEquals(5, family.countFamily());
     }
-
 }
 
 

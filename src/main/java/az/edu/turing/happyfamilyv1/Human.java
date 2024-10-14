@@ -90,9 +90,8 @@ public class Human {
     public void greetPet() {
         if (family != null && family.getPets() != null) {
             for (Object obj : family.getPets()) {
-                if (obj instanceof Pet) {
-                    Pet pet = (Pet) obj;
-                    System.out.println("Hello, " + pet.getNickname());
+                for (Pet pet : family.getPets()) {
+                    System.out.println("Hello," + pet.getNickname());
                 }
             }
         }
@@ -100,27 +99,19 @@ public class Human {
 
     public void describePet() {
         if (family != null && !family.getPets().isEmpty()) {
-            for (Object obj : family.getPets()) {
-                if (obj instanceof Pet) {
-                    Pet pet = (Pet) obj; // Type casting to Pet
-                    String slyness = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
-                    System.out.println("I have a " + pet.getSpecies().toString().toLowerCase() +
-                            ", he is " + pet.getAge() + " years old, he is " + slyness);
-                }
+            for (Pet pet : family.getPets()) {
+                String slyness = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
+                System.out.println("I have a" + pet.getSpecies() + "he is" + pet.getAge() + "years old");
             }
         }
     }
 
-    @Deprecated
-    @SuppressWarnings("removal")
+    @SuppressWarnings({"deprecation", "removal"})
     @Override
     protected void finalize() throws Throwable {
-        try {
-            System.out.println("Family object is being removed.");
-        } finally {
-            super.finalize();
-        }
+        System.out.println("Human object is being removed: " + this.getName() + " " + this.getSurname());
     }
+
 
     @Override
     public String toString() {

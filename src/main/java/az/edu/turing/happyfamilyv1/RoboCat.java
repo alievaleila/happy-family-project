@@ -1,10 +1,11 @@
 package az.edu.turing.happyfamilyv1;
 
-public class RoboCat extends Pet implements Foul {
+public class RoboCat extends Pet implements Foulable {
 
-   public RoboCat(String nickname,int age,int trickLevel,String [] habits) {
-       super(Species.ROBO_CAT,nickname,age,trickLevel,habits);
-   }
+    public RoboCat(String nickname, int age, int trickLevel, String[] habits) {
+        super(nickname, age, trickLevel, habits);
+        setSpecies(Species.ROBO_CAT);
+    }
 
     @Override
     public void respond() {
