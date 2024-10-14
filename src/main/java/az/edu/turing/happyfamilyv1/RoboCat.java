@@ -2,6 +2,10 @@ package az.edu.turing.happyfamilyv1;
 
 public class RoboCat extends Pet implements Foulable {
 
+    public RoboCat(Species species, String nickname) {
+        super(species, nickname);
+    }
+
     public RoboCat(String nickname, int age, int trickLevel, String[] habits) {
         super(nickname, age, trickLevel, habits);
         setSpecies(Species.ROBO_CAT);

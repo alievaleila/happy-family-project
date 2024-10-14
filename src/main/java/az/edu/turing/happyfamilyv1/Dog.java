@@ -2,6 +2,10 @@ package az.edu.turing.happyfamilyv1;
 
 public class Dog extends Pet implements Foulable {
 
+    public Dog(Species species, String nickname) {
+        super(species, nickname);
+    }
+
     public Dog(String nickname, int age, int trickLevel, String[] habits) {
         super(nickname, age, trickLevel, habits);
         setSpecies(Species.DOG);

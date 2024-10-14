@@ -89,10 +89,8 @@ public class Human {
 
     public void greetPet() {
         if (family != null && family.getPets() != null) {
-            for (Object obj : family.getPets()) {
-                for (Pet pet : family.getPets()) {
-                    System.out.println("Hello," + pet.getNickname());
-                }
+            for (Pet pet : family.getPets()) {
+                System.out.println("Hello," + pet.getNickname());
             }
         }
     }

@@ -1,5 +1,6 @@
 package az.edu.turing.happyfamilyv1;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -25,7 +26,7 @@ public abstract class Pet {
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
-        this.habits = new HashSet<>();
+        this.habits = new HashSet<>(Arrays.asList(habits));
 
     }
 
