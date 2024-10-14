@@ -1,9 +1,16 @@
 package az.edu.turing.happyfamilyv1;
 
-public class DomesticCat extends Pet implements Foul {
+import java.util.Set;
 
-    public DomesticCat(String nickname,int age,int trickLevel,String [] habits) {
-        super(Species.DOMESTIC_CAT,nickname,age,trickLevel,habits);
+public class DomesticCat extends Pet implements Foulable {
+
+    public DomesticCat(Species species, String nickname) {
+        super(species, nickname);
+    }
+
+    public DomesticCat(String nickname, int age, int trickLevel, Set<String> habits) {
+        super(nickname, age, trickLevel, habits);
+        setSpecies(Species.DOMESTIC_CAT);
 
     }
 

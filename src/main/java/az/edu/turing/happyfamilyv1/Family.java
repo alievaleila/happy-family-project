@@ -4,12 +4,11 @@ import java.util.*;
 
 public class Family {
 
-
     private Human mother;
     private Human father;
     private List<Human> children;
     private Set<Pet> pet;
-    private final HashSet<Object> pets;
+    private HashSet<Pet> pets;
 
     public Family(Human mother, Human father) {
         this.mother = mother;
@@ -50,25 +49,26 @@ public class Family {
         this.pet = pet;
     }
 
-    public HashSet<Object> getPets() {
+    public HashSet<Pet> getPets() {
         return pets;
+    }
+
+    public Optional<Human> deleteChild(int index) {
+        if (index < 0 || index >= children.size()) {
+            return Optional.empty();
+        }
+        return Optional.of(children.remove(index));
     }
 
     public boolean deleteChild(Human child) {
         return children.remove(child);
     }
 
-    public boolean deleteChild(int index) {
-        if (index >= 0 && index < children.size()) {
-            children.remove(index);
-            return true;
+    public List<Human> addChild(Human child) {
+        if (child != null) {
+            children.add(child);
         }
-        return false;
-    }
-
-    public void addChild(Human child) {
-        children.add(child);
-        child.setFamily(this);
+        return children;
     }
 
     public void addPet(Pet pet) {
@@ -83,11 +83,7 @@ public class Family {
     @Deprecated
     @SuppressWarnings("removal")
     protected void finalize() throws Throwable {
-        try {
-            System.out.println("Human object is being removed." + this);
-        } finally {
-            super.finalize();
-        }
+        System.out.println("Human object is being removed." + this);
     }
 
 
@@ -106,7 +102,10 @@ public class Family {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Family family = (Family) o;
-        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Objects.deepEquals(children, family.children) && Objects.equals(pet, family.pet);
+        return Objects.equals(mother, family.mother) &&
+                Objects.equals(father, family.father) &&
+                Objects.deepEquals(children, family.children) &&
+                Objects.equals(pet, family.pet);
     }
 
     @Override

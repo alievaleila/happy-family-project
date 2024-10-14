@@ -1,5 +1,6 @@
 package az.edu.turing.happyfamilyv1;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,9 +10,9 @@ public class Main {
 
 
         Pet dog = new Dog("Buddy", 5, 80, new String[]{"run", "fetch"});
-        Pet cat = new DomesticCat("Whiskers", 3, 70, new String[]{"sleep", "scratch"});
+        Pet cat = new DomesticCat("Whiskers", 3, 70, new HashSet<>(Arrays.asList("sleep", "scratch")));
         Pet roboCat = new RoboCat("Tom", 1, 90, new String[]{"beep", "scan"});
-        Pet fish = new Fish("Nemo", 2, 30, new String[]{"swim", "hide"});
+        Pet fish = new Fish("Nemo", 2, 30, new HashSet<>(Arrays.asList("swim", "hide")));
 
         System.out.println(dog);
         System.out.println(cat);
@@ -39,6 +40,6 @@ public class Main {
         woman.makeup();
 
         dog.respond();
-        ((Foul) dog).foul();
+        ((Foulable) dog).foul();
     }
 }

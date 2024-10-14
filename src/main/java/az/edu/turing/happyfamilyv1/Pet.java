@@ -13,22 +13,21 @@ public abstract class Pet {
     private int trickLevel;
     private Set<String> habits;
 
-    public Pet() {
-        habits = new HashSet<>();
+    protected Pet(String nickname, int age, int trickLevel, Set<String> habits) {
+        this.habits = new HashSet<>();
     }
 
-
-    public Pet(Species species, String nickname, int age, int trickLevel, String[] habits) {
+    protected Pet(Species species, String nickname) {
         this.species = species;
+        this.nickname = nickname;
+    }
+
+    protected Pet(String nickname, int age, int trickLevel, String[] habits) {
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
-        this.habits = new HashSet<>();
-        if (habits != null) {
-            for (String habit : habits) {
-                this.habits.add(habit);
-            }
-        }
+        this.habits = new HashSet<>(Arrays.asList(habits));
+
     }
 
 
