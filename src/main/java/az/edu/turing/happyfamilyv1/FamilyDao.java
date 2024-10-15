@@ -22,9 +22,7 @@ public interface FamilyDao {
 
     int countFamiliesWithMemberNumber(int peopleCount);
 
-    void createNewFamily(Human mother, Human father);
-
-    Family bornChild(Family family, String maleName, String femaleName);
+    Family createNewFamily(Human mother, Human father);
 
     Family adoptChild(Family family, Human child);
 
@@ -32,7 +30,5 @@ public interface FamilyDao {
 
     int count();
 
-    List<Pet> getPets(int index);
-
-    void addPet(int index, Pet pet);
+    boolean addPet(int index, Pet pet);
 }

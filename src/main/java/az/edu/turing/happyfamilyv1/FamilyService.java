@@ -1,5 +1,7 @@
 package az.edu.turing.happyfamilyv1;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyService {
@@ -30,8 +32,8 @@ public class FamilyService {
         return familyDao.countFamiliesWithMemberNumber(peopleCount);
     }
 
-    public void createNewFamily(Human mother, Human father) {
-        familyDao.createNewFamily(mother, father);
+    public Family createNewFamily(Human mother, Human father) {
+        return familyDao.createNewFamily(mother, father);
     }
 
     public boolean deleteFamilyByIndex(int index) {
@@ -39,7 +41,16 @@ public class FamilyService {
     }
 
     public Family bornChild(Family family, String maleName, String femaleName) {
-        return familyDao.bornChild(family, maleName, femaleName);
+        int currentYear = LocalDate.now().getYear();
+        boolean isBoy = Math.random() < 0.5;
+        String childrenName = isBoy ? maleName : femaleName;
+
+        Human child = isBoy ? new Man(childrenName, family.getFather().getSurname(), currentYear)
+                : new Woman(childrenName, family.getFather().getSurname(), currentYear);
+
+        family.addChild(child);
+        familyDao.saveFamily(family);
+        return family;
     }
 
     public Family adoptChild(Family family, Human child) {
@@ -59,11 +70,12 @@ public class FamilyService {
     }
 
     public List<Pet> getPets(int index) {
-        return familyDao.getPets(index);
+        Family family = familyDao.getFamilyById(index);
+        return family != null ? new ArrayList<>(family.getPets()) : new ArrayList<>();
     }
 
-    public void addPet(int index, Pet pet) {
-        familyDao.addPet(index, pet);
+    public boolean addPet(int index, Pet pet) {
+        return familyDao.addPet(index, pet);
     }
 
     public boolean deleteFamily(Family family) {

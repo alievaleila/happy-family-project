@@ -1,5 +1,6 @@
 package az.edu.turing.happyfamilyv1;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,10 @@ public class CollectionFamilyDao implements FamilyDao {
 
     @Override
     public void saveFamily(Family family) {
-        if (!families.contains(family)) {
+        int index = families.indexOf(family);
+        if (index == -1) {
             families.add(family);
         } else {
-            int index = families.indexOf(family);
             families.set(index, family);
         }
     }
@@ -69,23 +70,10 @@ public class CollectionFamilyDao implements FamilyDao {
     }
 
     @Override
-    public void createNewFamily(Human mother, Human father) {
+    public Family createNewFamily(Human mother, Human father) {
         Family newFamily = new Family(mother, father);
         saveFamily(newFamily);
-    }
-
-    @Override
-    public Family bornChild(Family family, String maleName, String femaleName) {
-        boolean isBoy = Math.random() < 0.5;
-        String childrenName = isBoy ? maleName : femaleName;
-
-        Human child = isBoy ? new Man(childrenName, family.getFather().getSurname(), 2024) : new Woman(childrenName, family.getMother().getSurname(), 2024);
-
-        family.addChild(child);
-
-        saveFamily(family);
-
-        return family;
+        return newFamily;
     }
 
     @Override
@@ -97,8 +85,9 @@ public class CollectionFamilyDao implements FamilyDao {
 
     @Override
     public void deleteChildrenOlderThen(int age) {
+        int currentYear = LocalDate.now().getYear();
         for (Family family : getAllFamilies()) {
-            family.getChildren().removeIf(child -> 2024 - child.getBirthYear() > age);
+            family.getChildren().removeIf(child -> currentYear - child.getBirthYear() > age);
             saveFamily(family);
         }
     }
@@ -108,18 +97,15 @@ public class CollectionFamilyDao implements FamilyDao {
         return getAllFamilies().size();
     }
 
-    @Override
-    public List<Pet> getPets(int index) {
-        Family family = getFamilyById(index);
-        return family != null ? new ArrayList<>(family.getPets()) : null;
-    }
 
     @Override
-    public void addPet(int index, Pet pet) {
+    public boolean addPet(int index, Pet pet) {
         Family family = getFamilyById(index);
         if (family != null) {
             family.addPet(pet);
             saveFamily(family);
+            return true;
         }
+        return false;
     }
 }

@@ -30,8 +30,8 @@ public class FamilyController {
         return familyService.countFamiliesWithMemberNumber(peopleCount);
     }
 
-    public void createNewFamily(Human mother, Human father) {
-        familyService.createNewFamily(mother, father);
+    public Family createNewFamily(Human mother, Human father) {
+        return familyService.createNewFamily(mother, father);
     }
 
     public boolean deleteFamilyByIndex(int index) {
@@ -62,8 +62,8 @@ public class FamilyController {
         return familyService.getPets(index);
     }
 
-    public void addPet(int index, Pet pet) {
-        familyService.addPet(index, pet);
+    public boolean addPet(int index, Pet pet) {
+        return familyService.addPet(index, pet);
     }
 
     public boolean deleteFamily(Family family) {
