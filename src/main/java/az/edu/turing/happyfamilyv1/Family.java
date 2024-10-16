@@ -90,10 +90,11 @@ public class Family {
     @Override
     public String toString() {
         return "Family{" +
-                "mother=" + mother +
-                ", father=" + father +
+                "mother=" + mother.getName() +
+                ", father=" + father.getName() +
                 ", children=" + children +
-                ", pets=" + pet +
+                ", pet=" + pet +
+                ", pets=" + pets +
                 '}';
     }
 
