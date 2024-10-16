@@ -25,7 +25,7 @@ public class Human {
         schedule = new HashMap<>();
     }
 
-    public Human(String name, String surname, int birthYear, int iq, Family family) {
+    public Human(String name, String surname, int birthYear, int iq, Map<DayOfWeek, String> schedule) {
         this.name = name;
         this.surname = surname;
         this.birthYear = birthYear;
