@@ -118,7 +118,8 @@ public class Human {
                 ", surname='" + surname + '\'' +
                 ", birthYear=" + birthYear +
                 ", iq=" + iq +
-                ", family=" + family +
+                ", family=" + "Family info" +
+                ", schedule=" + schedule +
                 '}';
     }
 }
