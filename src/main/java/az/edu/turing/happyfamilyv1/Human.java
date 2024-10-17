@@ -1,15 +1,17 @@
 package az.edu.turing.happyfamilyv1;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.*;
 
 public class Human {
 
     private String name;
     private String surname;
-    private int birthYear;
+    private long birthDate;  // Stores the birth date as Unix Millis Timestamp
     private int iq;
     private Family family;
     Map<String, String> schedule;
@@ -18,17 +20,17 @@ public class Human {
         schedule = new HashMap<>();
     }
 
-    public Human(String name, String surname, int birthYear) {
+    public Human(String name, String surname, long birthDate) {
         this.name = name;
         this.surname = surname;
-        this.birthYear = birthYear;
+        this.birthDate = birthDate;
         schedule = new HashMap<>();
     }
 
-    public Human(String name, String surname, int birthYear, int iq, Map<DayOfWeek, String> schedule) {
+    public Human(String name, String surname, long birthDate, int iq, Map<DayOfWeek, String> schedule) {
         this.name = name;
         this.surname = surname;
-        this.birthYear = birthYear;
+        this.birthDate = birthDate;
         this.iq = iq;
         this.family = family;
         schedule = new HashMap<>();
@@ -51,12 +53,12 @@ public class Human {
         this.surname = surname;
     }
 
-    public int getBirthYear() {
-        return birthYear;
+    public long getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
+    public void setBirthYear(long birthDate) {
+        this.birthDate = birthDate;
     }
 
     public int getIq() {
@@ -103,6 +105,13 @@ public class Human {
             }
         }
     }
+    public String describeAge() {
+        LocalDate birthLocalDate = Instant.ofEpochMilli(birthDate).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate today = LocalDate.now();
+        Period age = Period.between(birthLocalDate, today);
+
+        return "Age: " + age.getYears() + " years, " + age.getMonths() + " months, and " + age.getDays() + " days.";
+    }
 
     @SuppressWarnings({"deprecation", "removal"})
     @Override
@@ -113,13 +122,17 @@ public class Human {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedBirthDate = sdf.format(new Date(birthDate));
+
         return "Human{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", birthYear=" + birthYear +
+                ", birthDate=" + formattedBirthDate +  // formatted date
                 ", iq=" + iq +
                 ", family=" + "Family info" +
                 ", schedule=" + schedule +
                 '}';
     }
+
 }

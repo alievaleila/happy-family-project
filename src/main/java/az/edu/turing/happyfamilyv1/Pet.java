@@ -29,8 +29,6 @@ public abstract class Pet {
         this.habits = new HashSet<>(Arrays.asList(habits));
 
     }
-
-
     public Species getSpecies() {
         return species;
     }
