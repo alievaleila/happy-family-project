@@ -87,7 +87,7 @@ public class CollectionFamilyDao implements FamilyDao {
     public void deleteChildrenOlderThen(int age) {
         int currentYear = LocalDate.now().getYear();
         for (Family family : getAllFamilies()) {
-            family.getChildren().removeIf(child -> currentYear - child.getBirthYear() > age);
+            family.getChildren().removeIf(child -> currentYear - child.getBirthDate()> age);
             saveFamily(family);
         }
     }
