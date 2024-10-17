@@ -47,14 +47,6 @@ public class CollectionFamilyDao implements FamilyDao {
     }
 
     @Override
-    public void displayAllFamilies() {
-        List<Family> families = getAllFamilies();
-        for (int i = 0; i < families.size(); i++) {
-            System.out.println(i + ": " + families.get(i));
-        }
-    }
-
-    @Override
     public List<Family> getFamiliesBiggerThan(int peopleCount) {
         return getAllFamilies().stream().filter(f -> f.countFamily() > peopleCount).collect(Collectors.toList());
     }
@@ -67,13 +59,6 @@ public class CollectionFamilyDao implements FamilyDao {
     @Override
     public int countFamiliesWithMemberNumber(int peopleCount) {
         return (int) getAllFamilies().stream().filter(f -> f.countFamily() == peopleCount).count();
-    }
-
-    @Override
-    public Family createNewFamily(Human mother, Human father) {
-        Family newFamily = new Family(mother, father);
-        saveFamily(newFamily);
-        return newFamily;
     }
 
     @Override
@@ -97,15 +82,4 @@ public class CollectionFamilyDao implements FamilyDao {
         return getAllFamilies().size();
     }
 
-
-    @Override
-    public boolean addPet(int index, Pet pet) {
-        Family family = getFamilyById(index);
-        if (family != null) {
-            family.addPet(pet);
-            saveFamily(family);
-            return true;
-        }
-        return false;
-    }
 }

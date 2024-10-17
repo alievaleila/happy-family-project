@@ -130,7 +130,7 @@ public class Main {
             Family retrievedFamily = familyController.getFamilyById(0);
             System.out.println(retrievedFamily != null ? retrievedFamily : "No family found at the specified index.");
 
-            List<Pet> petsOfFamily = familyController.getPets(0);
+            Set<Pet> petsOfFamily = familyController.getPets(0);
             System.out.println(!petsOfFamily.isEmpty() ? petsOfFamily : "No pets found for the specified family.");
 
             familyController.addPet(0, roboCat);

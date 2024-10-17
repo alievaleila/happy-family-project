@@ -2,7 +2,9 @@ package az.edu.turing.happyfamilyv1;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FamilyService {
 
@@ -17,7 +19,10 @@ public class FamilyService {
     }
 
     public void displayAllFamilies() {
-        familyDao.displayAllFamilies();
+        List<Family> families = getAllFamilies();
+        for (int i = 0; i < families.size(); i++) {
+            System.out.println(i + ": " + families.get(i));
+        }
     }
 
     public List<Family> getFamiliesBiggerThan(int peopleCount) {
@@ -33,7 +38,9 @@ public class FamilyService {
     }
 
     public Family createNewFamily(Human mother, Human father) {
-        return familyDao.createNewFamily(mother, father);
+        Family newFamily = new Family(mother, father);
+        familyDao.saveFamily(newFamily);
+        return newFamily;
     }
 
     public boolean deleteFamilyByIndex(int index) {
@@ -69,13 +76,20 @@ public class FamilyService {
         return familyDao.getFamilyById(index);
     }
 
-    public List<Pet> getPets(int index) {
+    public Set<Pet> getPets(int index) {
         Family family = familyDao.getFamilyById(index);
-        return family != null ? new ArrayList<>(family.getPets()) : new ArrayList<>();
+        return family != null ? new HashSet<>(family.getPets()) : new HashSet<>();
     }
 
+
     public boolean addPet(int index, Pet pet) {
-        return familyDao.addPet(index, pet);
+        Family family = getFamilyById(index);
+        if (family != null) {
+            family.addPet(pet);
+            familyDao.saveFamily(family);
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteFamily(Family family) {

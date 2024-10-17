@@ -1,6 +1,7 @@
 package az.edu.turing.happyfamilyv1;
 
 import java.util.List;
+import java.util.Set;
 
 public class FamilyController {
 
@@ -58,7 +59,7 @@ public class FamilyController {
         return familyService.getFamilyById(index);
     }
 
-    public List<Pet> getPets(int index) {
+    public Set<Pet> getPets(int index) {
         return familyService.getPets(index);
     }
 
