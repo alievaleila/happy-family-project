@@ -11,7 +11,7 @@ public class Human {
 
     private String name;
     private String surname;
-    private long birthDate;  // Stores the birth date as Unix Millis Timestamp
+    private long birthDate;
     private int iq;
     private Family family;
     Map<String, String> schedule;
@@ -105,6 +105,7 @@ public class Human {
             }
         }
     }
+
     public String describeAge() {
         LocalDate birthLocalDate = Instant.ofEpochMilli(birthDate).atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate today = LocalDate.now();
@@ -115,7 +116,7 @@ public class Human {
 
     @SuppressWarnings({"deprecation", "removal"})
     @Override
-    protected void finalize() throws Throwable {
+    protected void finalize() {
         System.out.println("Human object is being removed: " + this.getName() + " " + this.getSurname());
     }
 
@@ -128,7 +129,7 @@ public class Human {
         return "Human{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", birthDate=" + formattedBirthDate +  // formatted date
+                ", birthDate=" + formattedBirthDate +
                 ", iq=" + iq +
                 ", family=" + "Family info" +
                 ", schedule=" + schedule +

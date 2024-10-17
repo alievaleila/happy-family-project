@@ -18,7 +18,6 @@ public class Main {
         System.out.println(roboCat);
         System.out.println(fish);
 
-        // SimpleDateFormat to parse date string into Unix timestamp (Millis)
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             long fatherBirthDate = dateFormat.parse("15/08/1985").getTime();
@@ -46,11 +45,9 @@ public class Main {
             dog.respond();
             ((Foulable) dog).foul();
 
-            // Displaying age for father and mother using describeAge()
             System.out.println(father.getName() + "'s age: " + father.describeAge());
             System.out.println(mother.getName() + "'s age: " + mother.describeAge());
 
-            // Family and child-related code
             System.out.println("-----part 6-----");
             FamilyDao familyDao = new CollectionFamilyDao();
             FamilyService familyService = new FamilyService(familyDao);
@@ -89,7 +86,6 @@ public class Main {
             child1.greetPet();
             child1.describePet();
 
-            // Print the age of the children
             System.out.println(child1.getName() + "'s age: " + child1.describeAge());
             System.out.println(child2.getName() + "'s age: " + child2.describeAge());
 
