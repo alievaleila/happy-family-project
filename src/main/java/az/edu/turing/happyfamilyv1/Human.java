@@ -101,7 +101,7 @@ public class Human {
         if (family != null && !family.getPets().isEmpty()) {
             for (Pet pet : family.getPets()) {
                 String slyness = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
-                System.out.println("I have a" + pet.getSpecies() + "he is" + pet.getAge() + "years old");
+                System.out.println("I have a" + pet.getSpecies() + "he is" + pet.getAge() + "years old.");
             }
         }
     }

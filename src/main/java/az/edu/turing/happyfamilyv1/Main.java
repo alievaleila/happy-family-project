@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Pet dog = new Dog("Buddy", 5, 80, new String[]{"run", "fetch"});
+        Pet dog = new Dog("Oskar", 5, 80, new String[]{"run", "fetch"});
         Pet cat = new DomesticCat("Whiskers", 3, 70, new HashSet<>(Arrays.asList("sleep", "scratch")));
         Pet roboCat = new RoboCat("Tom", 1, 90, new String[]{"beep", "scan"});
         Pet fish = new Fish("Nemo", 2, 30, new HashSet<>(Arrays.asList("swim", "hide")));
