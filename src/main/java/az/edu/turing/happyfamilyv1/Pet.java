@@ -14,7 +14,10 @@ public abstract class Pet {
     private Set<String> habits;
 
     protected Pet(String nickname, int age, int trickLevel, Set<String> habits) {
-        this.habits = new HashSet<>();
+        this.nickname = nickname;
+        this.age = age;
+        this.trickLevel = trickLevel;
+        this.habits = new HashSet<>(habits);
     }
 
     protected Pet(Species species, String nickname) {
