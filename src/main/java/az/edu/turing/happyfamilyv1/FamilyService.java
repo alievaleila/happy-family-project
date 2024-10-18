@@ -3,6 +3,7 @@ package az.edu.turing.happyfamilyv1;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FamilyService {
 
@@ -17,19 +18,26 @@ public class FamilyService {
     }
 
     public void displayAllFamilies() {
-        familyDao.displayAllFamilies();
+        familyDao.getAllFamilies()
+                .forEach(System.out::println);
     }
 
-    public List<Family> getFamiliesBiggerThan(int peopleCount) {
-        return familyDao.getFamiliesBiggerThan(peopleCount);
+    public List<Family> getFamiliesBiggerThan(Integer peopleCount) {
+        return getAllFamilies().stream()
+                .filter(family -> family.countFamily() > peopleCount)
+                .collect(Collectors.toList());
     }
 
-    public List<Family> getFamiliesLessThan(int peopleCount) {
-        return familyDao.getFamiliesLessThan(peopleCount);
+    public List<Family> getFamiliesLessThan(Integer peopleCount) {
+        return getAllFamilies().stream()
+                .filter(family -> family.countFamily() < peopleCount)
+                .collect(Collectors.toList());
     }
 
-    public int countFamiliesWithMemberNumber(int peopleCount) {
-        return familyDao.countFamiliesWithMemberNumber(peopleCount);
+    public Long countFamiliesWithMemberNumber(Integer peopleCount) {
+        return familyDao.getAllFamilies().stream()
+                .filter(family -> family.countFamily() == peopleCount)
+                .count();
     }
 
     public Family createNewFamily(Human mother, Human father) {
@@ -57,8 +65,15 @@ public class FamilyService {
         return familyDao.adoptChild(family, child);
     }
 
-    public void deleteChildrenOlderThen(int age) {
-        familyDao.deleteChildrenOlderThen(age);
+    public void deleteChildrenOlderThen(Integer age) {
+        List<Family> familyList = getAllFamilies();
+        int nowYear = LocalDate.now().getYear();
+        familyList.forEach(family -> {
+            List<Human> olderChildren = family.getChildren().stream()
+                    .filter(child -> (nowYear - child.getBirthDate()) <= age)
+                    .collect(Collectors.toList());
+            family.setChildren(olderChildren);
+        });
     }
 
     public int count() {
