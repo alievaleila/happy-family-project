@@ -2,9 +2,8 @@ package az.edu.turing.happyfamilyv1;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FamilyService {
 
@@ -19,28 +18,30 @@ public class FamilyService {
     }
 
     public void displayAllFamilies() {
-        List<Family> families = getAllFamilies();
-        for (int i = 0; i < families.size(); i++) {
-            System.out.println(i + ": " + families.get(i));
-        }
+        familyDao.getAllFamilies()
+                .forEach(System.out::println);
     }
 
-    public List<Family> getFamiliesBiggerThan(int peopleCount) {
-        return familyDao.getFamiliesBiggerThan(peopleCount);
+    public List<Family> getFamiliesBiggerThan(Integer peopleCount) {
+        return getAllFamilies().stream()
+                .filter(family -> family.countFamily() > peopleCount)
+                .collect(Collectors.toList());
     }
 
-    public List<Family> getFamiliesLessThan(int peopleCount) {
-        return familyDao.getFamiliesLessThan(peopleCount);
+    public List<Family> getFamiliesLessThan(Integer peopleCount) {
+        return getAllFamilies().stream()
+                .filter(family -> family.countFamily() < peopleCount)
+                .collect(Collectors.toList());
     }
 
-    public int countFamiliesWithMemberNumber(int peopleCount) {
-        return familyDao.countFamiliesWithMemberNumber(peopleCount);
+    public Long countFamiliesWithMemberNumber(Integer peopleCount) {
+        return familyDao.getAllFamilies().stream()
+                .filter(family -> family.countFamily() == peopleCount)
+                .count();
     }
 
     public Family createNewFamily(Human mother, Human father) {
-        Family newFamily = new Family(mother, father);
-        familyDao.saveFamily(newFamily);
-        return newFamily;
+        return familyDao.createNewFamily(mother, father);
     }
 
     public boolean deleteFamilyByIndex(int index) {
@@ -64,8 +65,15 @@ public class FamilyService {
         return familyDao.adoptChild(family, child);
     }
 
-    public void deleteChildrenOlderThen(int age) {
-        familyDao.deleteChildrenOlderThen(age);
+    public void deleteChildrenOlderThen(Integer age) {
+        List<Family> familyList = getAllFamilies();
+        int nowYear = LocalDate.now().getYear();
+        familyList.forEach(family -> {
+            List<Human> olderChildren = family.getChildren().stream()
+                    .filter(child -> (nowYear - child.getBirthDate()) <= age)
+                    .collect(Collectors.toList());
+            family.setChildren(olderChildren);
+        });
     }
 
     public int count() {
@@ -76,20 +84,13 @@ public class FamilyService {
         return familyDao.getFamilyById(index);
     }
 
-    public Set<Pet> getPets(int index) {
+    public List<Pet> getPets(int index) {
         Family family = familyDao.getFamilyById(index);
-        return family != null ? new HashSet<>(family.getPets()) : new HashSet<>();
+        return family != null ? new ArrayList<>(family.getPets()) : new ArrayList<>();
     }
 
-
     public boolean addPet(int index, Pet pet) {
-        Family family = getFamilyById(index);
-        if (family != null) {
-            family.addPet(pet);
-            familyDao.saveFamily(family);
-            return true;
-        }
-        return false;
+        return familyDao.addPet(index, pet);
     }
 
     public boolean deleteFamily(Family family) {
