@@ -67,12 +67,9 @@ public class FamilyService {
 
     public void deleteChildrenOlderThen(Integer age) {
         List<Family> familyList = getAllFamilies();
-        int nowYear = LocalDate.now().getYear();
+        Integer nowYear = LocalDate.now().getYear();
         familyList.forEach(family -> {
-            List<Human> olderChildren = family.getChildren().stream()
-                    .filter(child -> (nowYear - child.getBirthDate()) <= age)
-                    .collect(Collectors.toList());
-            family.setChildren(olderChildren);
+            family.getChildren().removeIf(child -> (nowYear - child.getBirthDate()) > age);
         });
     }
 
