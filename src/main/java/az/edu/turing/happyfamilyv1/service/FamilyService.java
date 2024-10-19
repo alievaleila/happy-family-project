@@ -97,7 +97,13 @@ public class FamilyService {
 
 
     public boolean addPet(int index, Pet pet) {
-        return familyDao.addPet(index, pet);
+        Family family = familyDao.getFamilyById(index);
+        if (family != null) {
+            family.addPet(pet);
+            familyDao.saveFamily(family);
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteFamily(Family family) {
