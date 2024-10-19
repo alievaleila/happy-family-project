@@ -1,4 +1,4 @@
-package az.edu.turing.happyfamilyv1;
+package az.edu.turing.happyfamilyv1.entity;
 
 import java.util.ArrayList;
 import java.util.HashSet;

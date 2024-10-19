@@ -1,4 +1,4 @@
-package az.edu.turing.happyfamilyv1;
+package az.edu.turing.happyfamilyv1.model;
 
 public enum DayOfWeek {
     SUNDAY,

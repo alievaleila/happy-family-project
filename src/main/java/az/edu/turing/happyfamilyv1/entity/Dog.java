@@ -1,4 +1,6 @@
-package az.edu.turing.happyfamilyv1;
+package az.edu.turing.happyfamilyv1.entity;
+
+import az.edu.turing.happyfamilyv1.model.Species;
 
 public class Dog extends Pet implements Foulable {
 

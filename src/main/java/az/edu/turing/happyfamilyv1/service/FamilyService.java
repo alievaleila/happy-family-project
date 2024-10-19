@@ -1,4 +1,11 @@
-package az.edu.turing.happyfamilyv1;
+package az.edu.turing.happyfamilyv1.service;
+
+import az.edu.turing.happyfamilyv1.entity.Family;
+import az.edu.turing.happyfamilyv1.entity.Human;
+import az.edu.turing.happyfamilyv1.entity.Man;
+import az.edu.turing.happyfamilyv1.entity.Pet;
+import az.edu.turing.happyfamilyv1.entity.Woman;
+import az.edu.turing.happyfamilyv1.dao.FamilyDao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,7 +48,9 @@ public class FamilyService {
     }
 
     public Family createNewFamily(Human mother, Human father) {
-        return familyDao.createNewFamily(mother, father);
+        Family newFamily = new Family(mother, father);
+        familyDao.saveFamily(newFamily);
+        return newFamily;
     }
 
     public boolean deleteFamilyByIndex(int index) {
@@ -85,6 +94,7 @@ public class FamilyService {
         Family family = familyDao.getFamilyById(index);
         return family != null ? new ArrayList<>(family.getPets()) : new ArrayList<>();
     }
+
 
     public boolean addPet(int index, Pet pet) {
         return familyDao.addPet(index, pet);

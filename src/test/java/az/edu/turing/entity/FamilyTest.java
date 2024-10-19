@@ -1,10 +1,9 @@
-package az.edu.turing;
+package az.edu.turing.entity;
 
 
-import az.edu.turing.happyfamilyv1.Family;
-import az.edu.turing.happyfamilyv1.Human;
-import az.edu.turing.happyfamilyv1.Pet;
-import az.edu.turing.happyfamilyv1.Species;
+import az.edu.turing.happyfamilyv1.entity.Family;
+import az.edu.turing.happyfamilyv1.entity.Human;
+import az.edu.turing.happyfamilyv1.entity.Pet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

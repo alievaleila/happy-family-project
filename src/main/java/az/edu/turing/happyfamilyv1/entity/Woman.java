@@ -1,6 +1,6 @@
-package az.edu.turing.happyfamilyv1;
+package az.edu.turing.happyfamilyv1.entity;
 
-public class Woman extends Human{
+public class Woman extends Human {
 
     public Woman(String name, String surname, int birthYear) {
         super(name, surname, birthYear);
