@@ -112,7 +112,7 @@ public class FamilyServiceTest {
                 new Man("Bob", "Smith", 1980));
         familyService.bornChild(familyService.getAllFamilies().get(0), "John", "Jane");
 
-        int count = familyService.countFamiliesWithMemberNumber(3);
+        long count = familyService.countFamiliesWithMemberNumber(3);
         assertEquals(1, count);
     }
 
