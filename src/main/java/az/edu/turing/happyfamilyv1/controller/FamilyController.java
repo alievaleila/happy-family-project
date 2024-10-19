@@ -1,4 +1,9 @@
-package az.edu.turing.happyfamilyv1;
+package az.edu.turing.happyfamilyv1.controller;
+
+import az.edu.turing.happyfamilyv1.entity.Family;
+import az.edu.turing.happyfamilyv1.service.FamilyService;
+import az.edu.turing.happyfamilyv1.entity.Human;
+import az.edu.turing.happyfamilyv1.entity.Pet;
 
 import java.util.List;
 import java.util.Set;
@@ -28,7 +33,7 @@ public class FamilyController {
     }
 
     public int countFamiliesWithMemberNumber(int peopleCount) {
-        return familyService.countFamiliesWithMemberNumber(peopleCount);
+        return Math.toIntExact(familyService.countFamiliesWithMemberNumber(peopleCount));
     }
 
     public Family createNewFamily(Human mother, Human father) {
@@ -60,7 +65,7 @@ public class FamilyController {
     }
 
     public Set<Pet> getPets(int index) {
-        return familyService.getPets(index);
+        return (Set<Pet>) familyService.getPets(index);
     }
 
     public boolean addPet(int index, Pet pet) {

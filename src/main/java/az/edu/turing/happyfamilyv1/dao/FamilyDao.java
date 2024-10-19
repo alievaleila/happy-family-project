@@ -1,4 +1,7 @@
-package az.edu.turing.happyfamilyv1;
+package az.edu.turing.happyfamilyv1.dao;
+
+import az.edu.turing.happyfamilyv1.entity.Family;
+import az.edu.turing.happyfamilyv1.entity.Human;
 
 import java.util.List;
 
@@ -25,4 +28,5 @@ public interface FamilyDao {
     void deleteChildrenOlderThen(int age);
 
     int count();
+
 }

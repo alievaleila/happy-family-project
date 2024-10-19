@@ -1,4 +1,8 @@
-package az.edu.turing.happyfamilyv1;
+package az.edu.turing.happyfamilyv1.dao.impl;
+
+import az.edu.turing.happyfamilyv1.entity.Family;
+import az.edu.turing.happyfamilyv1.entity.Human;
+import az.edu.turing.happyfamilyv1.dao.FamilyDao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
