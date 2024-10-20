@@ -15,7 +15,7 @@ public class Human {
 
     private String name;
     private String surname;
-    private long birthDate;
+    private long birthYear, birthMonth, birthDay;
     private int iq;
     private Family family;
     private Pet pet;
@@ -25,20 +25,32 @@ public class Human {
         schedule = new HashMap<>();
     }
 
-    public Human(String name, String surname, long birthDate) {
+    public Human(String name, String surname, long birthYear, int iq) {
         this.name = name;
         this.surname = surname;
-        this.birthDate = birthDate;
-        this.schedule = (schedule != null) ? schedule : new HashMap<>();
+        this.birthYear = birthYear;
+        this.iq = iq;
+//        this.schedule = (schedule != null) ? schedule : new HashMap<>();
     }
 
-    public Human(String name, String surname, long birthDate, int iq, Map<DayOfWeek, String> schedule) {
+    public Human(String name, String surname, long birthYear, long birthMonth, long birthDay, int iq, Map<DayOfWeek, String> schedule) {
         this.name = name;
         this.surname = surname;
-        this.birthDate = birthDate;
+        this.birthYear = birthYear;
+        this.birthMonth = birthMonth;
+        this.birthDay = birthDay;
         this.iq = iq;
         this.schedule = new HashMap<>();
 
+    }
+
+    public Human(String name, String surname, long birthYear, long birthMonth, long birthDay, double iq) {
+        this.name = name;
+        this.surname = surname;
+        this.birthYear = birthYear;
+        this.birthMonth = birthMonth;
+        this.birthDay = birthDay;
+        this.iq = (int) iq;
     }
 
     public String getName() {
@@ -57,12 +69,28 @@ public class Human {
         this.surname = surname;
     }
 
-    public long getBirthDate() {
-        return birthDate;
+    public long getBirthYear() {
+        return birthYear;
     }
 
-    public void setBirthYear(long birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthYear(long birthYear) {
+        this.birthYear = birthYear;
+    }
+
+    public long getBirthMonth() {
+        return birthMonth;
+    }
+
+    public void setBirthMonth(long birthMonth) {
+        this.birthMonth = birthMonth;
+    }
+
+    public long getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(long birthDay) {
+        this.birthDay = birthDay;
     }
 
     public int getIq() {
@@ -94,8 +122,8 @@ public class Human {
     }
 
     public String prettyFormat() {
-        return String.format("{name='%s', surname='%s', birthDate='%s', iq=%d, schedule=%s}",
-                name, surname, birthDate, iq, schedule != null ? schedule.toString() : "null");
+        return String.format("{name='%s', surname='%s', birthYear='%s', birthMonth='%s', birthDay='%s', iq=%d, schedule=%s}",
+                name, surname, birthYear, birthMonth, birthDay, iq, schedule != null ? schedule.toString() : "null");
     }
 
 
@@ -118,7 +146,7 @@ public class Human {
     }
 
     public String describeAge() {
-        LocalDate birthLocalDate = Instant.ofEpochMilli(birthDate).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate birthLocalDate = Instant.ofEpochMilli(birthYear).atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate today = LocalDate.now();
         Period age = Period.between(birthLocalDate, today);
 
@@ -135,8 +163,8 @@ public class Human {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedBirthDate = sdf.format(new Date(birthDate));
-        return String.format("Human{name='%s', surname='%s', birthDate=%s, iq=%d, pet=%s, family=%s, schedule=%s}",
-                name, surname, formattedBirthDate, iq, pet, family, schedule);
+        String formattedBirthDate = sdf.format(new Date(birthYear));
+        return String.format("{name='%s', surname='%s', birthYear='%s', birthMonth='%s', birthDay='%s', iq=%d, schedule=%s}",
+                name, surname, birthYear, birthMonth, birthDay, iq, schedule != null ? schedule.toString() : "null");
     }
 }

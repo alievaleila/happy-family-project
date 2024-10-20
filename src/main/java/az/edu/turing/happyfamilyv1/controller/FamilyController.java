@@ -77,4 +77,5 @@ public class FamilyController {
     public boolean deleteFamily(Family family) {
         return familyService.deleteFamily(family);
     }
+
 }
