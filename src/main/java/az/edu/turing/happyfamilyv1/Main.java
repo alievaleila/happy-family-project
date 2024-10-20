@@ -21,7 +21,8 @@ public class Main {
     public static void main(String[] args) {
 
         Pet dog = new Dog("Oskar", 5, 80, new String[]{"run", "fetch"});
-        Pet cat = new DomesticCat("Whiskers", 3, 70, new HashSet<>(Arrays.asList("sleep", "scratch")));
+        Pet cat = new DomesticCat("Whiskers", 3, 70,
+                new HashSet<>(Arrays.asList("sleep", "scratch")));
         Pet roboCat = new RoboCat("Tom", 1, 90, new String[]{"beep", "scan"});
         Pet fish = new Fish("Nemo", 2, 30, new HashSet<>(Arrays.asList("swim", "hide")));
 
@@ -122,7 +123,7 @@ public class Main {
                 System.out.println(fam);
             }
 
-            int familiesWith4 = familyController.countFamiliesWithMemberNumber(4);
+            long familiesWith4 = familyController.countFamiliesWithMemberNumber(4);
             System.out.println("Number of families with exactly 4 members: " + familiesWith4);
 
             familyController.bornChild(family, "Alex", "Emily");
@@ -142,7 +143,7 @@ public class Main {
             Family retrievedFamily = familyController.getFamilyById(0);
             System.out.println(retrievedFamily != null ? retrievedFamily : "No family found at the specified index.");
 
-            Set<Pet> petsOfFamily = familyController.getPets(0);
+            List<Pet> petsOfFamily = familyController.getPets(0);
             System.out.println(!petsOfFamily.isEmpty() ? petsOfFamily : "No pets found for the specified family.");
 
             familyController.addPet(0, roboCat);
