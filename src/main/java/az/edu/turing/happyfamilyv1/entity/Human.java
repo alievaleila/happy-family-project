@@ -57,8 +57,8 @@ public class Human {
         this.surname = surname;
     }
 
-    public Integer getBirthDate() {
-        return Math.toIntExact(birthDate);
+    public long getBirthDate() {
+        return birthDate;
     }
 
     public void setBirthYear(long birthDate) {

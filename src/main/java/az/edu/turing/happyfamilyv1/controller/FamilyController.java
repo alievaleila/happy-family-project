@@ -32,8 +32,8 @@ public class FamilyController {
         return familyService.getFamiliesLessThan(peopleCount);
     }
 
-    public int countFamiliesWithMemberNumber(int peopleCount) {
-        return Math.toIntExact(familyService.countFamiliesWithMemberNumber(peopleCount));
+    public long countFamiliesWithMemberNumber(int peopleCount) {
+        return familyService.countFamiliesWithMemberNumber( peopleCount);
     }
 
     public Family createNewFamily(Human mother, Human father) {
@@ -64,8 +64,8 @@ public class FamilyController {
         return familyService.getFamilyById(index);
     }
 
-    public Set<Pet> getPets(int index) {
-        return (Set<Pet>) familyService.getPets(index);
+    public List<Pet> getPets(int index) {
+        return familyService.getPets(index);
     }
 
     public boolean addPet(int index, Pet pet) {

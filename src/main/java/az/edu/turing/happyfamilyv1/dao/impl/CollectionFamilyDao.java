@@ -61,8 +61,8 @@ public class CollectionFamilyDao implements FamilyDao {
     }
 
     @Override
-    public int countFamiliesWithMemberNumber(int peopleCount) {
-        return (int) getAllFamilies().stream().filter(f -> f.countFamily() == peopleCount).count();
+    public long countFamiliesWithMemberNumber(long peopleCount) {
+        return (long) getAllFamilies().stream().filter(f -> f.countFamily() == peopleCount).count();
     }
 
     @Override

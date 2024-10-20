@@ -74,7 +74,7 @@ public class FamilyService {
         return familyDao.adoptChild(family, child);
     }
 
-    public void deleteChildrenOlderThen(Integer age) {
+    public void deleteChildrenOlderThen(int age) {
         List<Family> familyList = getAllFamilies();
         Integer nowYear = LocalDate.now().getYear();
         familyList.forEach(family -> {

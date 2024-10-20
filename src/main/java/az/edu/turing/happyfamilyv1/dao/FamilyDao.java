@@ -21,7 +21,7 @@ public interface FamilyDao {
 
     List<Family> getFamiliesLessThan(int peopleCount);
 
-    int countFamiliesWithMemberNumber(int peopleCount);
+    long countFamiliesWithMemberNumber(long peopleCount);
 
     Family adoptChild(Family family, Human child);
 
