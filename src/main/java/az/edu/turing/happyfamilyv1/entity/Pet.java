@@ -34,6 +34,13 @@ public abstract class Pet {
         this.habits = new HashSet<>(Arrays.asList(habits));
 
     }
+
+    public String prettyFormat() {
+        return String.format("{species='%s', nickname='%s', age=%d, trickLevel=%d, habits=%s}",
+                species, nickname, age, trickLevel, habits);
+    }
+
+
     public Species getSpecies() {
         return species;
     }
@@ -74,11 +81,6 @@ public abstract class Pet {
         this.habits = habits;
     }
 
-    public void addHabit(String habit) {
-        habits.add(habits.toString());
-
-    }
-
     public void eat() {
         System.out.println("I'm eating");
     }
@@ -99,12 +101,8 @@ public abstract class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
-                "nickname='" + nickname + '\'' +
-                ", age=" + age +
-                ", trickLevel=" + trickLevel +
-                ", habits=" + habits +
-                '}';
+        return String.format("%s{nickname='%s', age=%s, trickLevel=%s, habits=%s}",
+                species, nickname, age, trickLevel, habits);
     }
 
     @Override

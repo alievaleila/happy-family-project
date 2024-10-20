@@ -18,6 +18,7 @@ public class Human {
     private long birthDate;
     private int iq;
     private Family family;
+    private Pet pet;
     Map<String, String> schedule;
 
     public Human() {
@@ -28,7 +29,7 @@ public class Human {
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
-        schedule = new HashMap<>();
+        this.schedule = (schedule != null) ? schedule : new HashMap<>();
     }
 
     public Human(String name, String surname, long birthDate, int iq, Map<DayOfWeek, String> schedule) {
@@ -36,8 +37,7 @@ public class Human {
         this.surname = surname;
         this.birthDate = birthDate;
         this.iq = iq;
-        this.family = family;
-        schedule = new HashMap<>();
+        this.schedule = new HashMap<>();
 
     }
 
@@ -93,6 +93,12 @@ public class Human {
         schedule.put(day, activity);
     }
 
+    public String prettyFormat() {
+        return String.format("{name='%s', surname='%s', birthDate='%s', iq=%d, schedule=%s}",
+                name, surname, birthDate, iq, schedule != null ? schedule.toString() : "null");
+    }
+
+
     public void greetPet() {
         if (family != null && family.getPets() != null) {
             for (Pet pet : family.getPets()) {
@@ -101,13 +107,14 @@ public class Human {
         }
     }
 
-    public void describePet() {
-        if (family != null && !family.getPets().isEmpty()) {
-            for (Pet pet : family.getPets()) {
-                String slyness = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
-                System.out.println("I have a" + pet.getSpecies() + "he is" + pet.getAge() + "years old.");
-            }
+    public String describePet() {
+        StringBuilder result = new StringBuilder();
+        for (Pet pet : family.getPets()) {
+            String slyLevel = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
+            result.append(String.format("I have a %s, it is %d years old, and it is %s.\n",
+                    pet.getSpecies(), pet.getAge(), slyLevel));
         }
+        return result.toString();
     }
 
     public String describeAge() {
@@ -129,15 +136,7 @@ public class Human {
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String formattedBirthDate = sdf.format(new Date(birthDate));
-
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birthDate=" + formattedBirthDate +
-                ", iq=" + iq +
-                ", family=" + "Family info" +
-                ", schedule=" + schedule +
-                '}';
+        return String.format("Human{name='%s', surname='%s', birthDate=%s, iq=%d, pet=%s, family=%s, schedule=%s}",
+                name, surname, formattedBirthDate, iq, pet, family, schedule);
     }
-
 }

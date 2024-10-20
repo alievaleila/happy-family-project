@@ -12,8 +12,8 @@ public class Family {
     private Human mother;
     private Human father;
     private List<Human> children;
-    private Set<Pet> pet;
-    private HashSet<Pet> pets;
+    private Set<Pet> pets;
+
 
     public Family(Human mother, Human father) {
         this.mother = mother;
@@ -47,18 +47,36 @@ public class Family {
     }
 
     public Set<Pet> getPet() {
-        return pet;
-    }
-
-    public void setPet(Set<Pet> pet) {
-        this.pet = pet;
-    }
-
-    public HashSet<Pet> getPets() {
         return pets;
     }
 
-    public Optional<Human> deleteChild(int index) {
+    public void setPet(Set<Pet> pet) {
+        this.pets = pet;
+    }
+
+    public Set<Pet> getPets() {
+        return pets;
+    }
+
+    public String prettyFormat() {
+        StringBuilder sb = new StringBuilder("family:\n");
+        sb.append("\tmother: ").append(mother.prettyFormat()).append(",\n");
+        sb.append("\tfather: ").append(father.prettyFormat()).append(",\n");
+        sb.append("\tchildren:\n");
+        for (Human child : children) {
+            sb.append("\t\t").append(child.prettyFormat()).append("\n");
+        }
+
+        sb.append("\tpets:\n");
+        for (Pet pet : pets) {
+            sb.append("\t\t").append(pet.prettyFormat()).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+
+    public Optional<Human> deleteChildByIndex(int index) {
         if (index < 0 || index >= children.size()) {
             return Optional.empty();
         }
@@ -70,11 +88,13 @@ public class Family {
     }
 
     public List<Human> addChild(Human child) {
-        if (child != null) {
-            children.add(child);
+        if (child == null) {
+            throw new IllegalArgumentException("Child object cannot be null");
         }
+        children.add(child);
         return children;
     }
+
 
     public void addPet(Pet pet) {
         pets.add(pet);
@@ -89,18 +109,12 @@ public class Family {
     @SuppressWarnings("removal")
     protected void finalize() throws Throwable {
         System.out.println("Human object is being removed." + this);
+        super.finalize();
     }
-
 
     @Override
     public String toString() {
-        return "Family{" +
-                "mother=" + mother.getName() +
-                ", father=" + father.getName() +
-                ", children=" + children +
-                ", pet=" + pet +
-                ", pets=" + pets +
-                '}';
+        return String.format("Family{Mother=%s, Father=%s, Children=%s, Pets=%s}", mother, father, children, pets);
     }
 
     @Override
@@ -111,7 +125,7 @@ public class Family {
         return Objects.equals(mother, family.mother) &&
                 Objects.equals(father, family.father) &&
                 Objects.deepEquals(children, family.children) &&
-                Objects.equals(pet, family.pet);
+                Objects.equals(pets, family.pets);
     }
 
     @Override
