@@ -32,7 +32,7 @@ public class FamilyServiceTest {
     @Test
     public void testCreateNewFamily() {
         Human mother = new Woman("Alice", "Smith", 1980);
-        Human father = new Man("Bob", "Smith", 1980);
+        Human father = new Man("Bob", "Smith", 1980, 38);
 
         Family newFamily = familyService.createNewFamily(mother, father);
 
@@ -46,7 +46,7 @@ public class FamilyServiceTest {
         assertTrue(familyService.getAllFamilies().isEmpty());
 
         Human mother = new Woman("Alice", "Smith", 1980);
-        Human father = new Man("Bob", "Smith", 1980);
+        Human father = new Man("Bob", "Smith", 1980, 38);
         familyService.createNewFamily(mother, father);
 
         List<Family> families = familyService.getAllFamilies();
@@ -56,7 +56,7 @@ public class FamilyServiceTest {
     @Test
     public void testDeleteFamilyByIndex() {
         Human mother = new Woman("Alice", "Smith", 1980);
-        Human father = new Man("Bob", "Smith", 1980);
+        Human father = new Man("Bob", "Smith", 1980, 38);
         familyService.createNewFamily(mother, father);
 
         boolean result = familyService.deleteFamilyByIndex(0);
@@ -69,7 +69,7 @@ public class FamilyServiceTest {
         assertEquals(0, familyService.count());
 
         Human mother = new Woman("Alice", "Smith", 1980);
-        Human father = new Man("Bob", "Smith", 1980);
+        Human father = new Man("Bob", "Smith", 1980, 38);
         familyService.createNewFamily(mother, father);
 
         assertEquals(1, familyService.count());
@@ -78,7 +78,7 @@ public class FamilyServiceTest {
     @Test
     public void testBornChild() {
         Family family = new Family(new Woman("Alice", "Smith", 1980),
-                new Man("Bob", "Smith", 1980));
+                new Man("Bob", "Smith", 1980, 38));
         familyService.createNewFamily(family.getMother(), family.getFather());
 
         Family result = familyService.bornChild(family, "John", "Jane");
@@ -88,7 +88,7 @@ public class FamilyServiceTest {
     @Test
     public void testAdoptChild() {
         Family family = familyService.createNewFamily(new Woman("Alice", "Smith", 1980),
-                new Man("Bob", "Smith", 1980));
+                new Man("Bob", "Smith", 1980, 38));
         Human child = new Woman("Mary", "Doe", 2005);
 
         Family result = familyService.adoptChild(family, child);
@@ -98,7 +98,7 @@ public class FamilyServiceTest {
     @Test
     public void testGetFamiliesBiggerThan() {
         familyService.createNewFamily(new Woman("Alice", "Smith", 1980),
-                new Man("Bob", "Smith", 1980));
+                new Man("Bob", "Smith", 1980, 38));
         familyService.bornChild(familyService.getAllFamilies().get(0), "John", "Jane");
 
         List<Family> result = familyService.getFamiliesBiggerThan(1);
@@ -109,7 +109,7 @@ public class FamilyServiceTest {
     @Test
     public void testCountFamiliesWithMemberNumber() {
         familyService.createNewFamily(new Woman("Alice", "Smith", 1980),
-                new Man("Bob", "Smith", 1980));
+                new Man("Bob", "Smith", 1980, 38));
         familyService.bornChild(familyService.getAllFamilies().get(0), "John", "Jane");
 
         long count = familyService.countFamiliesWithMemberNumber(3);
@@ -119,7 +119,7 @@ public class FamilyServiceTest {
     @Test
     public void testGetFamilyById() {
         Family family = familyService.createNewFamily(new Woman("Alice", "Smith", 1980),
-                new Man("Bob", "Smith", 1980));
+                new Man("Bob", "Smith", 1980, 38));
 
         Family result = familyService.getFamilyById(0);
         assertEquals(family, result);
@@ -128,7 +128,7 @@ public class FamilyServiceTest {
     @Test
     public void testDisplayAllFamilies() {
         Human mother = new Woman("Alice", "Smith", 1980);
-        Human father = new Man("Bob", "Smith", 1980);
+        Human father = new Man("Bob", "Smith", 1980, 38);
         familyService.createNewFamily(mother, father);
         assertEquals(1, familyService.getAllFamilies().size());
         Family family = familyService.getAllFamilies().get(0);
@@ -140,14 +140,14 @@ public class FamilyServiceTest {
     @Test
     public void getFamiliesLessThan() {
         Human mother = new Woman("Alice", "Smith", 1980);
-        Human father = new Man("Bob", "Smith", 1980);
+        Human father = new Man("Bob", "Smith", 1980, 38);
         Family family = familyService.createNewFamily(mother, father);
 
         Human mother2 = new Woman("Carol", "Jones", 1985);
-        Human father2 = new Man("Dave", "Jones", 1985);
+        Human father2 = new Man("Dave", "Jones", 1985, 38);
         Family family2 = familyService.createNewFamily(mother2, father2);
 
-        family.addChild(new Man("Ethan", "Smith", 2020));
+        family.addChild(new Man("Ethan", "Smith", 2020, 38));
         List<Family> familiesLessThan3 = familyService.getFamiliesLessThan(3);
 
         assertEquals(1, familiesLessThan3.size());
@@ -157,13 +157,13 @@ public class FamilyServiceTest {
     @Test
     public void testDeleteChildrenOlderThen() {
         Human mother = new Woman("Alice", "Smith", 1980);
-        Human father = new Man("Bob", "Smith", 1980);
+        Human father = new Man("Bob", "Smith", 1980, 38);
         Family family = familyService.createNewFamily(mother, father);
 
 
-        family.addChild(new Man("Ethan", "Smith", 2015));
+        family.addChild(new Man("Ethan", "Smith", 2015, 38));
         family.addChild(new Woman("Emma", "Smith", 2010));
-        family.addChild(new Man("Liam", "Smith", 2005));
+        family.addChild(new Man("Liam", "Smith", 2005, 38));
 
 
         familyService.deleteChildrenOlderThen(15);

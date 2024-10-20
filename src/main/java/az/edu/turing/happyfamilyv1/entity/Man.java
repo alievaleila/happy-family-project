@@ -2,8 +2,11 @@ package az.edu.turing.happyfamilyv1.entity;
 
 public class Man extends Human {
 
-    public Man(String name, String surname, int birthYear) {
-        super(name, surname, birthYear);
+    public Man(String name, String surname, int birthYear, double fatherIq) {
+        super(name, surname, (long) birthYear, (int) fatherIq);
+    }
+
+    public Man(String fatherName, String fatherLastName, int fatherBirthYear, int fatherBirthMonth, int fatherBirthDay, int fatherIq) {
     }
 
     @Override

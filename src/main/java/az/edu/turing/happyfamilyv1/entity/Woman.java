@@ -2,10 +2,12 @@ package az.edu.turing.happyfamilyv1.entity;
 
 public class Woman extends Human {
 
-    public Woman(String name, String surname, int birthYear) {
-        super(name, surname, birthYear);
+    public Woman(String name, String surname, int birthYear, int birthMonth, int birthDay, int iq) {
+        super(name, surname, birthYear, birthMonth, birthDay, iq);
     }
 
+    public Woman(String childrenName, String surname, int currentYear) {
+    }
 
     @Override
     public void greetPet() {
