@@ -5,6 +5,7 @@ import az.edu.turing.happyfamilyv1.service.FamilyService;
 import az.edu.turing.happyfamilyv1.entity.Human;
 import az.edu.turing.happyfamilyv1.entity.Pet;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,6 +25,7 @@ public class FamilyController {
         familyService.displayAllFamilies();
     }
 
+
     public List<Family> getFamiliesBiggerThan(int peopleCount) {
         return familyService.getFamiliesBiggerThan(peopleCount);
     }
@@ -33,7 +35,7 @@ public class FamilyController {
     }
 
     public long countFamiliesWithMemberNumber(int peopleCount) {
-        return familyService.countFamiliesWithMemberNumber( peopleCount);
+        return familyService.countFamiliesWithMemberNumber(peopleCount);
     }
 
     public Family createNewFamily(Human mother, Human father) {

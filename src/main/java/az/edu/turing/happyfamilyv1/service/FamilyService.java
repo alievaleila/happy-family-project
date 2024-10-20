@@ -1,20 +1,22 @@
 package az.edu.turing.happyfamilyv1.service;
 
+import az.edu.turing.happyfamilyv1.dao.FamilyDao;
 import az.edu.turing.happyfamilyv1.entity.Family;
 import az.edu.turing.happyfamilyv1.entity.Human;
 import az.edu.turing.happyfamilyv1.entity.Man;
 import az.edu.turing.happyfamilyv1.entity.Pet;
 import az.edu.turing.happyfamilyv1.entity.Woman;
-import az.edu.turing.happyfamilyv1.dao.FamilyDao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class FamilyService {
 
     private FamilyDao familyDao;
+
 
     public FamilyService(FamilyDao familyDao) {
         this.familyDao = familyDao;
@@ -24,10 +26,13 @@ public class FamilyService {
         return familyDao.getAllFamilies();
     }
 
-    public void displayAllFamilies() {
-        familyDao.getAllFamilies()
-                .forEach(System.out::println);
+    public void displayFamilies() {
+        List<Family> families = getAllFamilies();
+        for (int i = 0; i < families.size(); i++) {
+            System.out.println((i + 1) + ". " + families.get(i).prettyFormat());
+        }
     }
+
 
     public List<Family> getFamiliesBiggerThan(Integer peopleCount) {
         return getAllFamilies().stream()
@@ -93,6 +98,12 @@ public class FamilyService {
     public List<Pet> getPets(int index) {
         Family family = familyDao.getFamilyById(index);
         return family != null ? new ArrayList<>(family.getPets()) : new ArrayList<>();
+    }
+
+
+    public void displayAllFamilies() {
+        List<Family> families = getAllFamilies();
+        IntStream.range(0, families.size()).forEach(i -> System.out.println((i + 1) + ". " + families.get(i)));
     }
 
 
