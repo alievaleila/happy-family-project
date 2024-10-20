@@ -7,6 +7,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,12 +45,12 @@ public class Human {
 
     }
 
-    public Human(String name, String surname, long birthYear, long birthMonth, long birthDay, double iq) {
+    public Human(String name, String surname, LocalDate birthYear, LocalDate birthMonth, LocalDate birthDay, double iq) {
         this.name = name;
         this.surname = surname;
-        this.birthYear = birthYear;
-        this.birthMonth = birthMonth;
-        this.birthDay = birthDay;
+        this.birthYear = convertLocalDateToMillis(birthYear);
+        this.birthMonth = convertLocalDateToMillis(birthMonth);
+        this.birthDay = convertLocalDateToMillis(birthDay);
         this.iq = (int) iq;
     }
 
@@ -126,6 +127,19 @@ public class Human {
                 name, surname, birthYear, birthMonth, birthDay, iq, schedule != null ? schedule.toString() : "null");
     }
 
+    public LocalDate convertMillisLocalDate(long millisYear, long millisMonth, long millisDay) {
+        return new Date(millisYear + millisMonth + millisDay).
+                toInstant().
+                atZone(ZoneId.systemDefault()).
+                toLocalDate();
+    }
+
+    public long convertLocalDateToMillis(LocalDate localDate) {
+        return localDate.
+                atStartOfDay(ZoneId.systemDefault()).
+                toInstant().
+                toEpochMilli();
+    }
 
     public void greetPet() {
         if (family != null && family.getPets() != null) {
@@ -163,7 +177,7 @@ public class Human {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedBirthDate = sdf.format(new Date(birthYear));
+        String formattedBirthDate = sdf.format(convertMillisLocalDate(birthYear, birthMonth, birthDay));
         return String.format("{name='%s', surname='%s', birthYear='%s', birthMonth='%s', birthDay='%s', iq=%d, schedule=%s}",
                 name, surname, birthYear, birthMonth, birthDay, iq, schedule != null ? schedule.toString() : "null");
     }
