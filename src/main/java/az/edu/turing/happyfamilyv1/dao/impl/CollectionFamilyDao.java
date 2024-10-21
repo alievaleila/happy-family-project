@@ -4,6 +4,11 @@ import az.edu.turing.happyfamilyv1.entity.Family;
 import az.edu.turing.happyfamilyv1.entity.Human;
 import az.edu.turing.happyfamilyv1.dao.FamilyDao;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +47,17 @@ public class CollectionFamilyDao implements FamilyDao {
 
     @Override
     public void saveFamily(Family family) {
+        if (family == null) {
+            throw new IllegalArgumentException("Family cannot be null");
+        }
+
         int index = families.indexOf(family);
         if (index == -1) {
             families.add(family);
+            System.out.println("Added new family: " + family);
         } else {
             families.set(index, family);
+            System.out.println("Updated existing family at index " + index + ": " + family);
         }
     }
 
@@ -84,6 +95,29 @@ public class CollectionFamilyDao implements FamilyDao {
     @Override
     public int count() {
         return getAllFamilies().size();
+    }
+    @Override
+    public void loadData(List<Family> newFamilies) {
+        this.families = newFamilies;
+    }
+
+    public void saveDataToFile(String filename) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(families);
+            System.out.println("Families have been saved to " + filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void loadDataFromFile(String filename) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            families = (List<Family>) in.readObject();
+            System.out.println("Families have been loaded from " + filename);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

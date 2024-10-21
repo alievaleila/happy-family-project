@@ -1,177 +1,88 @@
 package az.edu.turing.happyfamilyv1;
 
-import az.edu.turing.happyfamilyv1.controller.FamilyController;
-import az.edu.turing.happyfamilyv1.dao.FamilyDao;
 import az.edu.turing.happyfamilyv1.dao.impl.CollectionFamilyDao;
-
 import az.edu.turing.happyfamilyv1.entity.Dog;
 import az.edu.turing.happyfamilyv1.entity.DomesticCat;
 import az.edu.turing.happyfamilyv1.entity.Family;
-import az.edu.turing.happyfamilyv1.entity.Fish;
-import az.edu.turing.happyfamilyv1.entity.Foulable;
 import az.edu.turing.happyfamilyv1.entity.Human;
 import az.edu.turing.happyfamilyv1.entity.Man;
 import az.edu.turing.happyfamilyv1.entity.Pet;
-import az.edu.turing.happyfamilyv1.entity.RoboCat;
 import az.edu.turing.happyfamilyv1.entity.Woman;
-import az.edu.turing.happyfamilyv1.model.DayOfWeek;
 import az.edu.turing.happyfamilyv1.service.FamilyService;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        FamilyService familyService = new FamilyService(new CollectionFamilyDao());
+        Scanner scanner = new Scanner(System.in);
 
+        String filename = "src/main/resources/families.json";
 
-//        Pet dog = new Dog("Oskar", 5, 80, new String[]{"run", "fetch"});
-//        Pet cat = new DomesticCat("Whiskers", 3, 70,
-//                new HashSet<>(Arrays.asList("sleep", "scratch")));
-//        Pet roboCat = new RoboCat("Tom", 1, 90, new String[]{"beep", "scan"});
-//        Pet fish = new Fish("Nemo", 2, 30, new HashSet<>(Arrays.asList("swim", "hide")));
+        if (familyService.getAllFamilies().isEmpty()) {
+            createTestFamilies(familyService);
+        }
 
-//        System.out.println(dog);
-//        System.out.println(cat);
-//        System.out.println(roboCat);
-//        System.out.println(fish);
+        while (true) {
+            System.out.println("\n--- Family Management System ---");
+            System.out.println("1. Display all families");
+            System.out.println("2. Save families to JSON file");
+            System.out.println("3. Load families from JSON file");
+            System.out.println("0. Exit");
 
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//        try {
-//            long fatherBirthDate = dateFormat.parse("15/08/1985").getTime();
-//            long motherBirthDate = dateFormat.parse("20/10/1990").getTime();
+            int choice = scanner.nextInt();
 
-//            Man father = new Man("John", "Doe", (int) fatherBirthDate);
-//            Woman mother = new Woman("Jane", "Doe", (int) motherBirthDate);
+            switch (choice) {
+                case 1:
+                    familyService.displayAllFamilies();
+                    break;
+                case 2:
+                    familyService.saveData(filename);
+                    System.out.println("Families saved to JSON file.");
+                    break;
+                case 3:
+                    familyService.loadData(filename);
+                    System.out.println("Families loaded from JSON file:");
+                    familyService.displayAllFamilies();
+                    break;
+                case 0:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
 
-//            Family family = new Family(father, mother);
-//            Set<Pet> pets = new HashSet<>();
-//            pets.add(dog);
-//            pets.add(cat);
+    private static void createTestFamilies(FamilyService familyService) {
+        Human mother1 = new Woman("Lisa", "Smith", LocalDate.of(1990, 5, 20), 100);
+        Human father1 = new Man("Mike", "Smith", LocalDate.of(1988, 3, 15), 110);
+        Family family1 = new Family(mother1, father1);
 
-//            family.setPet(pets);
+        Human child1 = new Human("Emily", "Smith", LocalDate.of(2015, 4, 10), 95);
+        Human child2 = new Human("James", "Smith", LocalDate.of(2017, 8, 22), 98);
+        family1.addChild(child1);
+        family1.addChild(child2);
 
-//            father.setFamily(family);
-//            mother.setFamily(family);
+        Pet dog1 = new Dog("Buddy", 3, 75, new String[]{"barking", "fetching", "playing"});
+        Pet cat1 = new DomesticCat("Whiskers", 2, 60, new String[]{"scratching", "napping"});
+        family1.addPet(dog1);
+        family1.addPet(cat1);
 
-//            father.greetPet();
-//            father.repairCar();
+        familyService.createNewFamily(mother1, father1);
 
-//            mother.greetPet();
-//            mother.makeup();
+        Human mother2 = new Woman("Kate", "Johnson", LocalDate.of(1992, 6, 12), 105);
+        Human father2 = new Man("John", "Johnson", LocalDate.of(1990, 8, 22), 115);
+        Family family2 = new Family(mother2, father2);
 
-//            dog.respond();
-//            ((Foulable) dog).foul();
+        Human child3 = new Human("Sophia", "Johnson", LocalDate.of(2016, 9, 5), 90);
+        family2.addChild(child3);
 
-//            System.out.println(father.getName() + "'s age: " + father.describeAge());
-//            System.out.println(mother.getName() + "'s age: " + mother.describeAge());
+        Pet cat2 = new DomesticCat("Mittens", 4, 50, new String[]{"purring", "playing"});
+        family2.addPet(cat2);
 
-//            System.out.println("-----part 6-----");
-//            FamilyDao familyDao = new CollectionFamilyDao();
-//            FamilyService familyService = new FamilyService(familyDao);
-//            FamilyController familyController = new FamilyController(familyService);
-
-//            Map<DayOfWeek, String> scheduleChild1 = new HashMap<>();
-//            scheduleChild1.put(DayOfWeek.MONDAY, "Go to work");
-//            scheduleChild1.put(DayOfWeek.TUESDAY, "Go to school");
-
-//            Map<DayOfWeek, String> scheduleChild2 = new HashMap<>();
-//            scheduleChild2.put(DayOfWeek.WEDNESDAY, "Dance class");
-//            scheduleChild2.put(DayOfWeek.THURSDAY, "Piano lessons");
-
-//            long child1BirthDate = dateFormat.parse("10/09/2004").getTime();
-//            long child2BirthDate = dateFormat.parse("15/05/2006").getTime();
-
-//            Human child1 = new Human("Kevin", "Karlene", child1BirthDate, 90, scheduleChild1);
-//            Human child2 = new Human("Anna", "Karlene", child2BirthDate, 95, scheduleChild2);
-
-//            familyController.createNewFamily(mother, father);
-//            Family family2 = familyController.getFamilyById(0);
-
-//            familyController.addPet(0, dog);
-
-//            familyController.adoptChild(family, child1);
-//            familyController.adoptChild(family, child2);
-
-//            mother.greetPet();
-//            mother.describePet();
-//            mother.makeup();
-
-//            father.greetPet();
-//            father.describePet();
-//            father.repairCar();
-
-//            child1.greetPet();
-//            child1.describePet();
-
-//            System.out.println(child1.getName() + "'s age: " + child1.describeAge());
-//            System.out.println(child2.getName() + "'s age: " + child2.describeAge());
-
-//            int familiesCount = familyController.count();
-//            System.out.println("Total families: " + familiesCount);
-
-//            List<Family> allFamilies = familyController.getAllFamilies();
-//            System.out.println("All Families:");
-//            for (Family fam : allFamilies) {
-//                System.out.println(fam);
-//            }
-
-//            List<Family> bigFamilies = familyController.getFamiliesBiggerThan(3);
-//            System.out.println("Families bigger than 3 members:");
-//            for (Family fam : bigFamilies) {
-//                System.out.println(fam);
-//            }
-
-//            List<Family> smallFamilies = familyController.getFamiliesLessThan(3);
-//            System.out.println("Families less than 3 members:");
-//            for (Family fam : smallFamilies) {
-//                System.out.println(fam);
-//            }
-
-//            long familiesWith4 = familyController.countFamiliesWithMemberNumber(4);
-//            System.out.println("Number of families with exactly 4 members: " + familiesWith4);
-
-//            familyController.bornChild(family, "Alex", "Emily");
-//            familyController.displayAllFamilies();
-
-//            long adoptedChildBirthDate = dateFormat.parse("20/03/2010").getTime();
-//            Human adoptedChild = new Human("Lily", "Karlene", adoptedChildBirthDate, 100, Map.of(
-//                    DayOfWeek.FRIDAY, "Art class",
-//                    DayOfWeek.SATURDAY, "Swimming"
-//            ));
-//            familyController.adoptChild(family, adoptedChild);
-//            familyController.displayAllFamilies();
-
-//            familyController.deleteChildrenOlderThen(18);
-//            familyController.displayAllFamilies();
-
-//            Family retrievedFamily = familyController.getFamilyById(0);
-//            System.out.println(retrievedFamily != null ? retrievedFamily : "No family found at the specified index.");
-
-//            List<Pet> petsOfFamily = familyController.getPets(0);
-//            System.out.println(!petsOfFamily.isEmpty() ? petsOfFamily : "No pets found for the specified family.");
-
-//            familyController.addPet(0, roboCat);
-//            familyController.displayAllFamilies();
-
-//            boolean isDeleted = familyController.deleteFamilyByIndex(0);
-//            System.out.println("Family deleted: " + isDeleted);
-//            familyController.displayAllFamilies();
-
-//            boolean isDeletedNonExistent = familyController.deleteFamilyByIndex(1);
-//            System.out.println("Family deleted: " + isDeletedNonExistent);
-
-//            familyController.displayAllFamilies();
-
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
+        familyService.createNewFamily(mother2, father2);
     }
 }

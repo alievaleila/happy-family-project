@@ -8,6 +8,10 @@ public class RoboCat extends Pet implements Foulable {
         super(species, nickname);
     }
 
+    public RoboCat(){
+
+    }
+
     public RoboCat(String nickname, int age, int trickLevel, String[] habits) {
         super(nickname, age, trickLevel, habits);
         setSpecies(Species.ROBO_CAT);

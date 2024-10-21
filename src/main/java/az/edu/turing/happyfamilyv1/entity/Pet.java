@@ -15,6 +15,10 @@ public abstract class Pet {
     private int trickLevel;
     private Set<String> habits;
 
+    protected Pet(){
+
+    }
+
     protected Pet(String nickname, int age, int trickLevel, Set<String> habits) {
         this.nickname = nickname;
         this.age = age;

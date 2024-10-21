@@ -31,7 +31,6 @@ public class Human {
         this.surname = surname;
         this.birthDate = birthDate;
         this.iq = iq;
-//        this.schedule = (schedule != null) ? schedule : new HashMap<>();
     }
 
     public Human(String name, String surname, long birthDate, int iq, Map<DayOfWeek, String> schedule) {
@@ -48,6 +47,11 @@ public class Human {
         this.surname = surname;
         this.birthDate = convertLocalDateToMillis(birthDay);
         this.iq = (int) iq;
+    }
+
+    public Human(String lisa, String smith, int i) {
+        this.name = lisa;
+        this.surname = smith;
     }
 
     public String getName() {
@@ -158,8 +162,9 @@ public class Human {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedBirthDate = sdf.format(convertMillisLocalDate(birthDate));
+        String formattedBirthDate = sdf.format(Date.from(Instant.ofEpochMilli(birthDate)));
         return String.format("{name='%s', surname='%s', birthDate='%s', iq=%d, schedule=%s}",
-                name, surname, birthDate, iq, schedule != null ? schedule.toString() : "null");
+                name, surname, formattedBirthDate, iq, schedule != null ? schedule.toString() : "null");
     }
+
 }
