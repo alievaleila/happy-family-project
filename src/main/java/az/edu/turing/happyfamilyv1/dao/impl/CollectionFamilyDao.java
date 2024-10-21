@@ -96,9 +96,10 @@ public class CollectionFamilyDao implements FamilyDao {
     public int count() {
         return getAllFamilies().size();
     }
+
     @Override
-    public void loadData(List<Family> newFamilies) {
-        this.families = newFamilies;
+    public void loadData(List<Family> families) {
+        this.families.addAll(families);
     }
 
     public void saveDataToFile(String filename) {

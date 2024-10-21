@@ -1,8 +1,6 @@
 package az.edu.turing.happyfamilyv1.service;
 
 import az.edu.turing.happyfamilyv1.dao.FamilyDao;
-import az.edu.turing.happyfamilyv1.entity.Dog;
-import az.edu.turing.happyfamilyv1.entity.DomesticCat;
 import az.edu.turing.happyfamilyv1.entity.Family;
 import az.edu.turing.happyfamilyv1.entity.Human;
 import az.edu.turing.happyfamilyv1.entity.Man;
@@ -10,19 +8,12 @@ import az.edu.turing.happyfamilyv1.entity.Pet;
 import az.edu.turing.happyfamilyv1.entity.Woman;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -37,7 +28,7 @@ public class FamilyService {
 
     public void saveData(String filename) {
         List<Family> families = familyDao.getAllFamilies();
-        System.out.println("Families to save: " + families);  // Debugging: check if families exist
+        System.out.println("Families to save: " + families);
 
         if (families.isEmpty()) {
             System.out.println("No families to save.");
@@ -59,7 +50,6 @@ public class FamilyService {
         try (FileReader reader = new FileReader(filename)) {
             Family[] families = gson.fromJson(reader, Family[].class);
 
-            // Clear current families and load from file
             familyDao.getAllFamilies().clear();
             for (Family family : families) {
                 familyDao.saveFamily(family);
@@ -158,7 +148,6 @@ public class FamilyService {
 //
 //        System.out.println("Test data successfully added.");
 //    }
-//
 
     public int count() {
         return familyDao.count();
@@ -192,5 +181,9 @@ public class FamilyService {
 
     public boolean deleteFamily(Family family) {
         return familyDao.deleteFamily(family);
+    }
+
+    public void loadData(List<Family> families) {
+        familyDao.loadData(families);
     }
 }
