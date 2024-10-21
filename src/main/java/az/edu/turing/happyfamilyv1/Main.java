@@ -3,184 +3,175 @@ package az.edu.turing.happyfamilyv1;
 import az.edu.turing.happyfamilyv1.controller.FamilyController;
 import az.edu.turing.happyfamilyv1.dao.FamilyDao;
 import az.edu.turing.happyfamilyv1.dao.impl.CollectionFamilyDao;
-import az.edu.turing.happyfamilyv1.entity.*;
-import az.edu.turing.happyfamilyv1.exception.FamilyOverFlowException;
+
+import az.edu.turing.happyfamilyv1.entity.Dog;
+import az.edu.turing.happyfamilyv1.entity.DomesticCat;
+import az.edu.turing.happyfamilyv1.entity.Family;
+import az.edu.turing.happyfamilyv1.entity.Fish;
+import az.edu.turing.happyfamilyv1.entity.Foulable;
+import az.edu.turing.happyfamilyv1.entity.Human;
+import az.edu.turing.happyfamilyv1.entity.Man;
+import az.edu.turing.happyfamilyv1.entity.Pet;
+import az.edu.turing.happyfamilyv1.entity.RoboCat;
+import az.edu.turing.happyfamilyv1.entity.Woman;
+import az.edu.turing.happyfamilyv1.model.DayOfWeek;
 import az.edu.turing.happyfamilyv1.service.FamilyService;
 
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) {
-        FamilyDao familyDao = new CollectionFamilyDao();
-        FamilyService familyService = new FamilyService(familyDao);
-        FamilyController familyController = new FamilyController(familyService);
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to Family Management System!");
 
-        while (true) {
-            displayMenu();
-            String command = scanner.nextLine().trim();
+//        Pet dog = new Dog("Oskar", 5, 80, new String[]{"run", "fetch"});
+//        Pet cat = new DomesticCat("Whiskers", 3, 70,
+//                new HashSet<>(Arrays.asList("sleep", "scratch")));
+//        Pet roboCat = new RoboCat("Tom", 1, 90, new String[]{"beep", "scan"});
+//        Pet fish = new Fish("Nemo", 2, 30, new HashSet<>(Arrays.asList("swim", "hide")));
 
-            switch (command) {
-                case "1":
-                    familyService.fillWithTestData();
-                    break;
+//        System.out.println(dog);
+//        System.out.println(cat);
+//        System.out.println(roboCat);
+//        System.out.println(fish);
 
-                case "2":
-                    familyController.displayAllFamilies();
-                    break;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        try {
+//            long fatherBirthDate = dateFormat.parse("15/08/1985").getTime();
+//            long motherBirthDate = dateFormat.parse("20/10/1990").getTime();
 
-                case "3":
-                    System.out.println("Enter the minimum number of family members:");
-                    int minPeopleCount = Integer.parseInt(scanner.nextLine());
-                    familyController.getFamiliesBiggerThan(minPeopleCount);
-                    break;
+//            Man father = new Man("John", "Doe", (int) fatherBirthDate);
+//            Woman mother = new Woman("Jane", "Doe", (int) motherBirthDate);
 
-                case "4":
-                    System.out.println("Enter the maximum number of family members:");
-                    int maxPeopleCount = Integer.parseInt(scanner.nextLine());
-                    familyController.getFamiliesLessThan(maxPeopleCount);
-                    break;
+//            Family family = new Family(father, mother);
+//            Set<Pet> pets = new HashSet<>();
+//            pets.add(dog);
+//            pets.add(cat);
 
-                case "5":
-                    System.out.println("Enter the exact number of family members:");
-                    int exactPeopleCount = Integer.parseInt(scanner.nextLine());
-                    long count = familyController.countFamiliesWithMemberNumber(exactPeopleCount);
-                    System.out.println("Number of families with exactly " + exactPeopleCount + " members: " + count);
-                    break;
+//            family.setPet(pets);
 
-                case "6":
-                    createNewFamily(scanner, familyController);
-                    break;
+//            father.setFamily(family);
+//            mother.setFamily(family);
 
-                case "7":
-                    System.out.println("Enter the family ID to delete:");
-                    int familyId = Integer.parseInt(scanner.nextLine());
-                    boolean deleted = familyController.deleteFamilyByIndex(familyId);
-                    System.out.println(deleted ? "Family deleted." : "Family not found.");
-                    break;
+//            father.greetPet();
+//            father.repairCar();
 
-                case "8":
-                    editFamily(scanner, familyController);
-                    break;
+//            mother.greetPet();
+//            mother.makeup();
 
-                case "9":
-                    System.out.println("Enter the age limit for removing children:");
-                    int age = Integer.parseInt(scanner.nextLine());
-                    familyController.deleteChildrenOlderThen(age);
-                    break;
+//            dog.respond();
+//            ((Foulable) dog).foul();
 
-                case "exit":
-                    System.out.println("Exiting the application...");
-                    return;
+//            System.out.println(father.getName() + "'s age: " + father.describeAge());
+//            System.out.println(mother.getName() + "'s age: " + mother.describeAge());
 
-                default:
-                    System.out.println("Invalid command, please try again.");
-            }
-        }
-    }
+//            System.out.println("-----part 6-----");
+//            FamilyDao familyDao = new CollectionFamilyDao();
+//            FamilyService familyService = new FamilyService(familyDao);
+//            FamilyController familyController = new FamilyController(familyService);
 
-    private static void displayMenu() {
-        System.out.println("\nAvailable commands: ");
-        System.out.println("1. Fill with test data");
-        System.out.println("2. Display the entire list of families");
-        System.out.println("3. Display families with more than a specified number of members");
-        System.out.println("4. Display families with fewer than a specified number of members");
-        System.out.println("5. Count families with a specified number of members");
-        System.out.println("6. Create a new family");
-        System.out.println("7. Delete a family by its index");
-        System.out.println("8. Edit a family");
-        System.out.println("9. Remove all children over a certain age");
-        System.out.println("Type 'exit' to quit.");
-        System.out.print("Enter a command: ");
-    }
+//            Map<DayOfWeek, String> scheduleChild1 = new HashMap<>();
+//            scheduleChild1.put(DayOfWeek.MONDAY, "Go to work");
+//            scheduleChild1.put(DayOfWeek.TUESDAY, "Go to school");
 
-    private static void createNewFamily(Scanner scanner, FamilyController familyController) {
-        try {
-            System.out.println("Enter mother's name:");
-            String motherName = scanner.nextLine();
-            System.out.println("Enter mother's last name:");
-            String motherLastName = scanner.nextLine();
-            System.out.println("Enter mother's birth year:");
-            int motherBirthYear = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter mother's month of birth:");
-            int motherBirthMonth = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter mother's birthday:");
-            int motherBirthDay = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter mother's IQ:");
-            int motherIq = Integer.parseInt(scanner.nextLine());
+//            Map<DayOfWeek, String> scheduleChild2 = new HashMap<>();
+//            scheduleChild2.put(DayOfWeek.WEDNESDAY, "Dance class");
+//            scheduleChild2.put(DayOfWeek.THURSDAY, "Piano lessons");
 
-            Human mother = new Woman(motherName, motherLastName, motherBirthYear, motherBirthMonth, motherBirthDay, motherIq);
+//            long child1BirthDate = dateFormat.parse("10/09/2004").getTime();
+//            long child2BirthDate = dateFormat.parse("15/05/2006").getTime();
 
-            System.out.println("Enter father's name:");
-            String fatherName = scanner.nextLine();
-            System.out.println("Enter father's last name:");
-            String fatherLastName = scanner.nextLine();
-            System.out.println("Enter father's birth year:");
-            int fatherBirthYear = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter father's month of birth:");
-            int fatherBirthMonth = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter father's birthday:");
-            int fatherBirthDay = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter father's IQ:");
-            int fatherIq = Integer.parseInt(scanner.nextLine());
+//            Human child1 = new Human("Kevin", "Karlene", child1BirthDate, 90, scheduleChild1);
+//            Human child2 = new Human("Anna", "Karlene", child2BirthDate, 95, scheduleChild2);
 
-            Human father = new Man(fatherName, fatherLastName, fatherBirthYear, fatherBirthMonth, fatherBirthDay, fatherIq);
+//            familyController.createNewFamily(mother, father);
+//            Family family2 = familyController.getFamilyById(0);
 
-            familyController.createNewFamily(mother, father);
-            System.out.println("New family created successfully.");
-        } catch (Exception e) {
-            System.out.println("Error creating family: " + e.getMessage());
-        }
-    }
+//            familyController.addPet(0, dog);
 
-    private static void editFamily(Scanner scanner, FamilyController familyController) {
-        System.out.println("Enter the family ID to edit:");
-        int familyId = Integer.parseInt(scanner.nextLine());
+//            familyController.adoptChild(family, child1);
+//            familyController.adoptChild(family, child2);
 
-        System.out.println("1. Give birth to a baby");
-        System.out.println("2. Adopt a child");
-        System.out.println("3. Return to main menu");
-        System.out.print("Enter a command: ");
-        String command = scanner.nextLine().trim();
+//            mother.greetPet();
+//            mother.describePet();
+//            mother.makeup();
 
-        switch (command) {
-            case "1":
-                System.out.println("Enter the boy's name:");
-                String boyName = scanner.nextLine();
-                System.out.println("Enter the girl's name:");
-                String girlName = scanner.nextLine();
-                try {
-                    familyController.bornChild(familyController.getFamilyById(familyId), boyName, girlName);
-                    System.out.println("Child born successfully.");
-                } catch (FamilyOverFlowException e) {
-                    System.out.println("Cannot add child: " + e.getMessage());
-                }
-                break;
+//            father.greetPet();
+//            father.describePet();
+//            father.repairCar();
 
-            case "2":
-                System.out.println("Enter the child's first name:");
-                String childName = scanner.nextLine();
-                System.out.println("Enter the child's last name:");
-                String childSurname = scanner.nextLine();
-                System.out.println("Enter the child's year of birth:");
-                int childBirthYear = Integer.parseInt(scanner.nextLine());
-                System.out.println("Enter the child's IQ:");
-                int childIq = Integer.parseInt(scanner.nextLine());
+//            child1.greetPet();
+//            child1.describePet();
 
-                Human adoptedChild = new Human(childName, childSurname, childBirthYear, childIq);
-                familyController.adoptChild(familyController.getFamilyById(familyId), adoptedChild);
-                System.out.println("Child adopted successfully.");
-                break;
+//            System.out.println(child1.getName() + "'s age: " + child1.describeAge());
+//            System.out.println(child2.getName() + "'s age: " + child2.describeAge());
 
-            case "3":
-                System.out.println("Returning to main menu.");
-                break;
+//            int familiesCount = familyController.count();
+//            System.out.println("Total families: " + familiesCount);
 
-            default:
-                System.out.println("Invalid command.");
-        }
+//            List<Family> allFamilies = familyController.getAllFamilies();
+//            System.out.println("All Families:");
+//            for (Family fam : allFamilies) {
+//                System.out.println(fam);
+//            }
+
+//            List<Family> bigFamilies = familyController.getFamiliesBiggerThan(3);
+//            System.out.println("Families bigger than 3 members:");
+//            for (Family fam : bigFamilies) {
+//                System.out.println(fam);
+//            }
+
+//            List<Family> smallFamilies = familyController.getFamiliesLessThan(3);
+//            System.out.println("Families less than 3 members:");
+//            for (Family fam : smallFamilies) {
+//                System.out.println(fam);
+//            }
+
+//            long familiesWith4 = familyController.countFamiliesWithMemberNumber(4);
+//            System.out.println("Number of families with exactly 4 members: " + familiesWith4);
+
+//            familyController.bornChild(family, "Alex", "Emily");
+//            familyController.displayAllFamilies();
+
+//            long adoptedChildBirthDate = dateFormat.parse("20/03/2010").getTime();
+//            Human adoptedChild = new Human("Lily", "Karlene", adoptedChildBirthDate, 100, Map.of(
+//                    DayOfWeek.FRIDAY, "Art class",
+//                    DayOfWeek.SATURDAY, "Swimming"
+//            ));
+//            familyController.adoptChild(family, adoptedChild);
+//            familyController.displayAllFamilies();
+
+//            familyController.deleteChildrenOlderThen(18);
+//            familyController.displayAllFamilies();
+
+//            Family retrievedFamily = familyController.getFamilyById(0);
+//            System.out.println(retrievedFamily != null ? retrievedFamily : "No family found at the specified index.");
+
+//            List<Pet> petsOfFamily = familyController.getPets(0);
+//            System.out.println(!petsOfFamily.isEmpty() ? petsOfFamily : "No pets found for the specified family.");
+
+//            familyController.addPet(0, roboCat);
+//            familyController.displayAllFamilies();
+
+//            boolean isDeleted = familyController.deleteFamilyByIndex(0);
+//            System.out.println("Family deleted: " + isDeleted);
+//            familyController.displayAllFamilies();
+
+//            boolean isDeletedNonExistent = familyController.deleteFamilyByIndex(1);
+//            System.out.println("Family deleted: " + isDeletedNonExistent);
+
+//            familyController.displayAllFamilies();
+
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
     }
 }
