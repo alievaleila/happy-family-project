@@ -16,7 +16,7 @@ public class Human {
 
     private String name;
     private String surname;
-    private long birthYear, birthMonth, birthDay;
+    private long birthDate;
     private int iq;
     private Family family;
     private Pet pet;
@@ -26,31 +26,27 @@ public class Human {
         schedule = new HashMap<>();
     }
 
-    public Human(String name, String surname, long birthYear, int iq) {
+    public Human(String name, String surname, long birthDate, int iq) {
         this.name = name;
         this.surname = surname;
-        this.birthYear = birthYear;
+        this.birthDate = birthDate;
         this.iq = iq;
 //        this.schedule = (schedule != null) ? schedule : new HashMap<>();
     }
 
-    public Human(String name, String surname, long birthYear, long birthMonth, long birthDay, int iq, Map<DayOfWeek, String> schedule) {
+    public Human(String name, String surname, long birthDate, int iq, Map<DayOfWeek, String> schedule) {
         this.name = name;
         this.surname = surname;
-        this.birthYear = birthYear;
-        this.birthMonth = birthMonth;
-        this.birthDay = birthDay;
+        this.birthDate = birthDate;
         this.iq = iq;
         this.schedule = new HashMap<>();
 
     }
 
-    public Human(String name, String surname, LocalDate birthYear, LocalDate birthMonth, LocalDate birthDay, double iq) {
+    public Human(String name, String surname, LocalDate birthDay, double iq) {
         this.name = name;
         this.surname = surname;
-        this.birthYear = convertLocalDateToMillis(birthYear);
-        this.birthMonth = convertLocalDateToMillis(birthMonth);
-        this.birthDay = convertLocalDateToMillis(birthDay);
+        this.birthDate = convertLocalDateToMillis(birthDay);
         this.iq = (int) iq;
     }
 
@@ -70,28 +66,12 @@ public class Human {
         this.surname = surname;
     }
 
-    public long getBirthYear() {
-        return birthYear;
+    public long getYear() {
+        return birthDate;
     }
 
-    public void setBirthYear(long birthYear) {
-        this.birthYear = birthYear;
-    }
-
-    public long getBirthMonth() {
-        return birthMonth;
-    }
-
-    public void setBirthMonth(long birthMonth) {
-        this.birthMonth = birthMonth;
-    }
-
-    public long getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(long birthDay) {
-        this.birthDay = birthDay;
+    public void setYear(long birthdate) {
+        this.birthDate = birthdate;
     }
 
     public int getIq() {
@@ -123,12 +103,12 @@ public class Human {
     }
 
     public String prettyFormat() {
-        return String.format("{name='%s', surname='%s', birthYear='%s', birthMonth='%s', birthDay='%s', iq=%d, schedule=%s}",
-                name, surname, birthYear, birthMonth, birthDay, iq, schedule != null ? schedule.toString() : "null");
+        return String.format("{name='%s', surname='%s', birthDate='%s', IQ=%d, schedule='%s',family=%s",
+                name, surname, birthDate, iq, schedule != null ? schedule.toString() : "null");
     }
 
-    public LocalDate convertMillisLocalDate(long millisYear, long millisMonth, long millisDay) {
-        return new Date(millisYear + millisMonth + millisDay).
+    public LocalDate convertMillisLocalDate(long millisDate) {
+        return new Date(millisDate).
                 toInstant().
                 atZone(ZoneId.systemDefault()).
                 toLocalDate();
@@ -160,11 +140,12 @@ public class Human {
     }
 
     public String describeAge() {
-        LocalDate birthLocalDate = Instant.ofEpochMilli(birthYear).atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate today = LocalDate.now();
-        Period age = Period.between(birthLocalDate, today);
-
-        return "Age: " + age.getYears() + " years, " + age.getMonths() + " months, and " + age.getDays() + " days.";
+        LocalDate currentDate = LocalDate.now();
+        LocalDate birthDateInLocal = convertMillisLocalDate(birthDate);
+        long year = ChronoUnit.YEARS.between(birthDateInLocal, currentDate);
+        long month = ChronoUnit.MONTHS.between(birthDateInLocal.plusYears(year), currentDate);
+        long day = ChronoUnit.DAYS.between(birthDateInLocal.plusYears(year).plusMonths(month), currentDate);
+        return String.format("%s was born %d year, %d month, %d day", name, year, month, day);
     }
 
     @SuppressWarnings({"deprecation", "removal"})
@@ -177,8 +158,8 @@ public class Human {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedBirthDate = sdf.format(convertMillisLocalDate(birthYear, birthMonth, birthDay));
-        return String.format("{name='%s', surname='%s', birthYear='%s', birthMonth='%s', birthDay='%s', iq=%d, schedule=%s}",
-                name, surname, birthYear, birthMonth, birthDay, iq, schedule != null ? schedule.toString() : "null");
+        String formattedBirthDate = sdf.format(convertMillisLocalDate(birthDate));
+        return String.format("{name='%s', surname='%s', birthDate='%s', iq=%d, schedule=%s}",
+                name, surname, birthDate, iq, schedule != null ? schedule.toString() : "null");
     }
 }
