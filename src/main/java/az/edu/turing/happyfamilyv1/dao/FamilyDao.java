@@ -29,5 +29,5 @@ public interface FamilyDao {
 
     int count();
 
-    void loadData(List<Family> newFamilies);
+    void loadData(List<Family> families);
 }

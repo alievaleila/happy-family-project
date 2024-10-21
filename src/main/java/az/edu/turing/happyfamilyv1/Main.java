@@ -16,20 +16,21 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        FamilyService familyService = new FamilyService(new CollectionFamilyDao());
+        CollectionFamilyDao familyDao = new CollectionFamilyDao();
+        FamilyService familyService = new FamilyService(familyDao);
         Scanner scanner = new Scanner(System.in);
 
         String filename = "src/main/resources/families.json";
 
         if (familyService.getAllFamilies().isEmpty()) {
-            createTestFamilies(familyService);
+            createTestFamilies(familyDao);
         }
 
         while (true) {
             System.out.println("\n--- Family Management System ---");
             System.out.println("1. Display all families");
             System.out.println("2. Save families to JSON file");
-            System.out.println("3. Load families from JSON file");
+            System.out.println("3. Load families from JSON file or family list");
             System.out.println("0. Exit");
 
             int choice = scanner.nextInt();
@@ -43,8 +44,16 @@ public class Main {
                     System.out.println("Families saved to JSON file.");
                     break;
                 case 3:
-                    familyService.loadData(filename);
-                    System.out.println("Families loaded from JSON file:");
+                    System.out.println("Write \"list\" for loading from list or write \"file\" for loading from file :");
+                    String loadChoice = scanner.next();
+                    if ("list".equalsIgnoreCase(loadChoice)) {
+                        System.out.println("Families loaded from list:");
+                        familyService.loadData(familyService.getAllFamilies());
+                    } else {
+                        System.out.println("Families loaded from JSON file:");
+                        familyService.loadData(filename);
+                    }
+
                     familyService.displayAllFamilies();
                     break;
                 case 0:
@@ -56,7 +65,7 @@ public class Main {
         }
     }
 
-    private static void createTestFamilies(FamilyService familyService) {
+    private static void createTestFamilies(CollectionFamilyDao familyDao) {
         Human mother1 = new Woman("Lisa", "Smith", LocalDate.of(1990, 5, 20), 100);
         Human father1 = new Man("Mike", "Smith", LocalDate.of(1988, 3, 15), 110);
         Family family1 = new Family(mother1, father1);
@@ -71,7 +80,7 @@ public class Main {
         family1.addPet(dog1);
         family1.addPet(cat1);
 
-        familyService.createNewFamily(mother1, father1);
+        familyDao.saveFamily(family1);
 
         Human mother2 = new Woman("Kate", "Johnson", LocalDate.of(1992, 6, 12), 105);
         Human father2 = new Man("John", "Johnson", LocalDate.of(1990, 8, 22), 115);
@@ -83,6 +92,6 @@ public class Main {
         Pet cat2 = new DomesticCat("Mittens", 4, 50, new String[]{"purring", "playing"});
         family2.addPet(cat2);
 
-        familyService.createNewFamily(mother2, father2);
+        familyDao.saveFamily(family2);
     }
 }
