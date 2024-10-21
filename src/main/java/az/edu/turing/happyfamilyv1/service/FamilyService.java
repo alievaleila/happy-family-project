@@ -8,7 +8,16 @@ import az.edu.turing.happyfamilyv1.entity.Human;
 import az.edu.turing.happyfamilyv1.entity.Man;
 import az.edu.turing.happyfamilyv1.entity.Pet;
 import az.edu.turing.happyfamilyv1.entity.Woman;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,6 +33,41 @@ public class FamilyService {
 
     public FamilyService(FamilyDao familyDao) {
         this.familyDao = familyDao;
+    }
+
+    public void saveData(String filename) {
+        List<Family> families = familyDao.getAllFamilies();
+        System.out.println("Families to save: " + families);  // Debugging: check if families exist
+
+        if (families.isEmpty()) {
+            System.out.println("No families to save.");
+            return;
+        }
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        try (FileWriter writer = new FileWriter(filename)) {
+            gson.toJson(families, writer);
+            System.out.println("Family data saved to " + filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void loadData(String filename) {
+        Gson gson = new Gson();
+
+        try (FileReader reader = new FileReader(filename)) {
+            Family[] families = gson.fromJson(reader, Family[].class);
+
+            // Clear current families and load from file
+            familyDao.getAllFamilies().clear();
+            for (Family family : families) {
+                familyDao.saveFamily(family);
+            }
+            System.out.println("Family data loaded from " + filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Family> getAllFamilies() {
@@ -88,33 +132,33 @@ public class FamilyService {
         List<Family> familyList = getAllFamilies();
         Integer nowYear = LocalDate.now().getYear();
         familyList.forEach(family -> {
-            family.getChildren().removeIf(child -> (nowYear - child.getBirthYear()) > age);
+            family.getChildren().removeIf(child -> (nowYear - child.getYear()) > age);
         });
     }
 
-    public void fillWithTestData() {
-        Human mother1 = new Human("Kate", "Bibo", 1991, 3, 3, 95);
-        Human father1 = new Human("Karl", "Bibo", 1990, 12, 10, 90);
-        Family family1 = new Family(mother1, father1);
-        family1.addChild(new Human("Donna", "Bibo", 2018, 10, 23, 92));
-        family1.addChild(new Human("Sun", "Bibo", 2018, 10, 23, 92));
-        Set<String> dogHabits = new HashSet<>(List.of("sleep"));
-        Pet dog = new Dog("Jack", 3, 3, dogHabits);
-        family1.addPet(dog);
-        familyDao.saveFamily(family1);
-
-        Human mother2 = new Human("Lisa", "Smith", 1993, 4, 15, 100);
-        Human father2 = new Human("Mike", "Smith", 1990, 2, 8, 88);
-        Family family2 = new Family(mother2, father2);
-        family2.addChild(new Human("John", "Smith", 2015, 1, 1, 95));
-        Set<String> catHabits = new HashSet<>(List.of("eat", "play"));
-        Pet cat = new DomesticCat("Oscar", 5, 81, catHabits);
-        family2.addPet(cat);
-        familyDao.saveFamily(family2);
-
-        System.out.println("Test data successfully added.");
-    }
-
+//    public void fillWithTestData() {
+//        Human mother1 = new Human("Kate", "Bibo", 1991, 3, 3, 95);
+//        Human father1 = new Human("Karl", "Bibo", 1990, 12, 10, 90);
+//        Family family1 = new Family(mother1, father1);
+//        family1.addChild(new Human("Donna", "Bibo", 2018, 10, 23, 92));
+//        family1.addChild(new Human("Sun", "Bibo", 2018, 10, 23, 92));
+//        Set<String> dogHabits = new HashSet<>(List.of("sleep"));
+//        Pet dog = new Dog("Jack", 3, 3, dogHabits);
+//        family1.addPet(dog);
+//        familyDao.saveFamily(family1);
+//
+//        Human mother2 = new Human("Lisa", "Smith", 1993, 4, 15, 100);
+//        Human father2 = new Human("Mike", "Smith", 1990, 2, 8, 88);
+//        Family family2 = new Family(mother2, father2);
+//        family2.addChild(new Human("John", "Smith", 2015, 1, 1, 95));
+//        Set<String> catHabits = new HashSet<>(List.of("eat", "play"));
+//        Pet cat = new DomesticCat("Oscar", 5, 81, catHabits);
+//        family2.addPet(cat);
+//        familyDao.saveFamily(family2);
+//
+//        System.out.println("Test data successfully added.");
+//    }
+//
 
     public int count() {
         return familyDao.count();

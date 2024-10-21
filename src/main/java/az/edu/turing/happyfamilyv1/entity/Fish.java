@@ -10,6 +10,10 @@ public class Fish extends Pet {
         super(species, nickname);
     }
 
+    public Fish() {
+        super();
+    }
+
     public Fish(String nickname, int age, int trickLevel, Set<String> habits) {
         super(nickname, age, trickLevel, habits);
         setSpecies(Species.FISH);

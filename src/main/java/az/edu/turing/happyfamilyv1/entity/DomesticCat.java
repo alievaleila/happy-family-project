@@ -15,6 +15,13 @@ public class DomesticCat extends Pet implements Foulable {
         setSpecies(Species.DOMESTIC_CAT);
 
     }
+    public DomesticCat(){
+
+    }
+
+    public DomesticCat(String whiskers, int age, int trickLevel, String[] catHabits) {
+        super(whiskers, age, trickLevel, catHabits);
+    }
 
     @Override
     public void respond() {

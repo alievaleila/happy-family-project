@@ -1,0 +1,34 @@
+[
+  {
+    "mother": {
+      "name": "Lisa",
+      "surname": "Smith",
+      "birthDate": 643143600000,
+      "iq": 100
+    },
+    "father": {
+      "name": "Mike",
+      "surname": "Smith",
+      "birthDate": 574372800000,
+      "iq": 110
+    },
+    "children": [],
+    "pets": []
+  },
+  {
+    "mother": {
+      "name": "Kate",
+      "surname": "Johnson",
+      "birthDate": 708292800000,
+      "iq": 105
+    },
+    "father": {
+      "name": "John",
+      "surname": "Johnson",
+      "birthDate": 651265200000,
+      "iq": 115
+    },
+    "children": [],
+    "pets": []
+  }
+]

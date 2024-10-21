@@ -1,5 +1,7 @@
 package az.edu.turing.happyfamilyv1.entity;
 
+import java.time.LocalDate;
+
 public class Woman extends Human {
 
     public Woman(String name, String surname, int birthDate, int iq) {
@@ -7,6 +9,14 @@ public class Woman extends Human {
     }
 
     public Woman(String childrenName, String surname, int currentYear) {
+    }
+
+    public Woman(){
+
+    }
+
+    public Woman(String lisa, String smith, LocalDate of, int iq) {
+        super(lisa, smith, of, iq);
     }
 
     @Override

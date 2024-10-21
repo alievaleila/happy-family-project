@@ -22,6 +22,10 @@ public class Family {
         this.pets = new HashSet<>();
     }
 
+    public Family(){
+
+    }
+
     public Human getMother() {
         return mother;
     }
@@ -87,12 +91,11 @@ public class Family {
         return children.remove(child);
     }
 
-    public List<Human> addChild(Human child) {
+    public void addChild(Human child) {
         if (child == null) {
             throw new IllegalArgumentException("Child object cannot be null");
         }
         children.add(child);
-        return children;
     }
 
 
