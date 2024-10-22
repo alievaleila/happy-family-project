@@ -28,6 +28,4 @@ public interface FamilyDao {
     void deleteChildrenOlderThen(int age);
 
     int count();
-
-    void loadData(List<Family> families);
 }
