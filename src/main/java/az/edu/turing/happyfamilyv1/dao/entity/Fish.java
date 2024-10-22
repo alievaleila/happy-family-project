@@ -1,4 +1,4 @@
-package az.edu.turing.happyfamilyv1.entity;
+package az.edu.turing.happyfamilyv1.dao.entity;
 
 import az.edu.turing.happyfamilyv1.model.Species;
 

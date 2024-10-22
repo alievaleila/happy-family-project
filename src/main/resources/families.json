@@ -12,8 +12,41 @@
       "birthDate": 574372800000,
       "iq": 110
     },
-    "children": [],
-    "pets": []
+    "children": [
+      {
+        "name": "Emily",
+        "surname": "Smith",
+        "birthDate": 1428606000000,
+        "iq": 95
+      },
+      {
+        "name": "James",
+        "surname": "Smith",
+        "birthDate": 1503345600000,
+        "iq": 98
+      }
+    ],
+    "pets": [
+      {
+        "nickname": "Buddy",
+        "age": 3,
+        "trickLevel": 75,
+        "habits": [
+          "playing",
+          "barking",
+          "fetching"
+        ]
+      },
+      {
+        "nickname": "Whiskers",
+        "age": 2,
+        "trickLevel": 60,
+        "habits": [
+          "scratching",
+          "napping"
+        ]
+      }
+    ]
   },
   {
     "mother": {
@@ -28,7 +61,24 @@
       "birthDate": 651265200000,
       "iq": 115
     },
-    "children": [],
-    "pets": []
+    "children": [
+      {
+        "name": "Sophia",
+        "surname": "Johnson",
+        "birthDate": 1473019200000,
+        "iq": 90
+      }
+    ],
+    "pets": [
+      {
+        "nickname": "Mittens",
+        "age": 4,
+        "trickLevel": 50,
+        "habits": [
+          "purring",
+          "playing"
+        ]
+      }
+    ]
   }
 ]

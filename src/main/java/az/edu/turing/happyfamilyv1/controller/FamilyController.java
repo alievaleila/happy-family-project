@@ -1,13 +1,11 @@
 package az.edu.turing.happyfamilyv1.controller;
 
-import az.edu.turing.happyfamilyv1.entity.Family;
+import az.edu.turing.happyfamilyv1.dao.entity.Family;
 import az.edu.turing.happyfamilyv1.service.FamilyService;
-import az.edu.turing.happyfamilyv1.entity.Human;
-import az.edu.turing.happyfamilyv1.entity.Pet;
+import az.edu.turing.happyfamilyv1.dao.entity.Human;
+import az.edu.turing.happyfamilyv1.dao.entity.Pet;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class FamilyController {
 

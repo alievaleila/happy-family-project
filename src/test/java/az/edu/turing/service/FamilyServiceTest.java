@@ -3,10 +3,10 @@ package az.edu.turing.service;
 
 import az.edu.turing.happyfamilyv1.dao.FamilyDao;
 import az.edu.turing.happyfamilyv1.dao.impl.CollectionFamilyDao;
-import az.edu.turing.happyfamilyv1.entity.Family;
-import az.edu.turing.happyfamilyv1.entity.Human;
-import az.edu.turing.happyfamilyv1.entity.Man;
-import az.edu.turing.happyfamilyv1.entity.Woman;
+import az.edu.turing.happyfamilyv1.dao.entity.Family;
+import az.edu.turing.happyfamilyv1.dao.entity.Human;
+import az.edu.turing.happyfamilyv1.dao.entity.Man;
+import az.edu.turing.happyfamilyv1.dao.entity.Woman;
 import az.edu.turing.happyfamilyv1.service.FamilyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,13 +1,13 @@
 package az.edu.turing.happyfamilyv1;
 
 import az.edu.turing.happyfamilyv1.dao.impl.CollectionFamilyDao;
-import az.edu.turing.happyfamilyv1.entity.Dog;
-import az.edu.turing.happyfamilyv1.entity.DomesticCat;
-import az.edu.turing.happyfamilyv1.entity.Family;
-import az.edu.turing.happyfamilyv1.entity.Human;
-import az.edu.turing.happyfamilyv1.entity.Man;
-import az.edu.turing.happyfamilyv1.entity.Pet;
-import az.edu.turing.happyfamilyv1.entity.Woman;
+import az.edu.turing.happyfamilyv1.dao.entity.Dog;
+import az.edu.turing.happyfamilyv1.dao.entity.DomesticCat;
+import az.edu.turing.happyfamilyv1.dao.entity.Family;
+import az.edu.turing.happyfamilyv1.dao.entity.Human;
+import az.edu.turing.happyfamilyv1.dao.entity.Man;
+import az.edu.turing.happyfamilyv1.dao.entity.Pet;
+import az.edu.turing.happyfamilyv1.dao.entity.Woman;
 import az.edu.turing.happyfamilyv1.service.FamilyService;
 
 import java.time.LocalDate;
