@@ -1,11 +1,10 @@
-package az.edu.turing.happyfamilyv1.entity;
+package az.edu.turing.happyfamilyv1.dao.entity;
 
 import az.edu.turing.happyfamilyv1.model.DayOfWeek;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;

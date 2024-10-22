@@ -1,18 +1,19 @@
-package az.edu.turing.happyfamilyv1.entity;
+package az.edu.turing.happyfamilyv1.dao.entity;
 
 import java.time.LocalDate;
 
 public class Woman extends Human {
+
+    public Woman(){
+
+    }
 
     public Woman(String name, String surname, int birthDate, int iq) {
         super(name, surname, birthDate, iq);
     }
 
     public Woman(String childrenName, String surname, int currentYear) {
-    }
-
-    public Woman(){
-
+        super(childrenName, surname, currentYear);
     }
 
     public Woman(String lisa, String smith, LocalDate of, int iq) {
