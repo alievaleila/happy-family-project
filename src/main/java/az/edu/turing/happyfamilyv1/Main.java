@@ -30,7 +30,7 @@ public class Main {
             System.out.println("\n--- Family Management System ---");
             System.out.println("1. Display all families");
             System.out.println("2. Save families to JSON file");
-            System.out.println("3. Load families from JSON file or family list");
+            System.out.println("3. Load families from JSON file");
             System.out.println("0. Exit");
 
             int choice = scanner.nextInt();
@@ -44,16 +44,7 @@ public class Main {
                     System.out.println("Families saved to JSON file.");
                     break;
                 case 3:
-                    System.out.println("Write \"list\" for loading from list or write \"file\" for loading from file :");
-                    String loadChoice = scanner.next();
-                    if ("list".equalsIgnoreCase(loadChoice)) {
-                        System.out.println("Families loaded from list:");
-                        familyService.loadData(familyService.getAllFamilies());
-                    } else {
-                        System.out.println("Families loaded from JSON file:");
-                        familyService.loadData(filename);
-                    }
-
+                    familyService.loadData(filename);
                     familyService.displayAllFamilies();
                     break;
                 case 0:

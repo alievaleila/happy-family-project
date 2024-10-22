@@ -97,11 +97,6 @@ public class CollectionFamilyDao implements FamilyDao {
         return getAllFamilies().size();
     }
 
-    @Override
-    public void loadData(List<Family> families) {
-        this.families.addAll(families);
-    }
-
     public void saveDataToFile(String filename) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
             out.writeObject(families);

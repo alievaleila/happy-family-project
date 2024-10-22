@@ -161,8 +161,4 @@ public class FamilyService {
     public boolean deleteFamily(Family family) {
         return familyDao.deleteFamily(family);
     }
-
-    public void loadData(List<Family> families) {
-        familyDao.loadData(families);
-    }
 }
