@@ -20,7 +20,7 @@ public class Main {
         FamilyService familyService = new FamilyService(familyDao);
         Scanner scanner = new Scanner(System.in);
 
-        String filename = "src/main/resources/families.json";
+        String FILE_NAME = "src/main/resources/families.json";
 
         if (familyService.getAllFamilies().isEmpty()) {
             createTestFamilies(familyDao);
@@ -40,11 +40,11 @@ public class Main {
                     familyService.displayAllFamilies();
                     break;
                 case 2:
-                    familyService.saveData(filename);
+                    familyService.saveData(FILE_NAME);
                     System.out.println("Families saved to JSON file.");
                     break;
                 case 3:
-                    familyService.loadData(filename);
+                    familyService.loadData(FILE_NAME);
                     familyService.displayAllFamilies();
                     break;
                 case 0:
