@@ -8,15 +8,16 @@ public class Man extends Human {
         super(name, surname, (long) birthYear, (int) fatherIq);
     }
 
-    public Man(String fatherName, String fatherLastName, int fatherBirthYear, int fatherBirthMonth, int fatherBirthDay, int fatherIq) {
+    public Man(String fatherName, String fatherLastName, int fatherBirthYear, int fatherBirthMonth,
+               int fatherBirthDay, int fatherIq) {
     }
 
     public Man(String mike, String smith, LocalDate of, int fatherIq) {
         super(mike, smith, of, fatherIq);
     }
 
-    public Man(){
-
+    public Man() {
+        super();
     }
 
     @Override
