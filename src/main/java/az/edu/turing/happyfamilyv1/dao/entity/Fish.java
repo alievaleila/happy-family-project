@@ -6,15 +6,12 @@ import java.util.Set;
 
 public class Fish extends Pet {
 
-    public Fish(Species species, String nickname) {
-        super(species, nickname);
+    public Fish(String nickname) {
+        super(nickname);
+        setSpecies(Species.FISH);
     }
 
-    public Fish() {
-        super();
-    }
-
-    public Fish(String nickname, int age, int trickLevel, Set<String> habits) {
+    public Fish(String nickname, Integer age, Integer trickLevel, Set<String> habits) {
         super(nickname, age, trickLevel, habits);
         setSpecies(Species.FISH);
     }

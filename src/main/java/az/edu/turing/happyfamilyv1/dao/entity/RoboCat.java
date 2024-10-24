@@ -2,17 +2,16 @@ package az.edu.turing.happyfamilyv1.dao.entity;
 
 import az.edu.turing.happyfamilyv1.model.Species;
 
+import java.util.Set;
+
 public class RoboCat extends Pet implements Foulable {
 
-    public RoboCat(Species species, String nickname) {
-        super(species, nickname);
+    public RoboCat(String nickname) {
+        super(nickname);
+        setSpecies(Species.ROBO_CAT);
     }
 
-    public RoboCat(){
-
-    }
-
-    public RoboCat(String nickname, int age, int trickLevel, String[] habits) {
+    public RoboCat(String nickname, Integer age, Integer trickLevel, Set<String> habits) {
         super(nickname, age, trickLevel, habits);
         setSpecies(Species.ROBO_CAT);
     }
