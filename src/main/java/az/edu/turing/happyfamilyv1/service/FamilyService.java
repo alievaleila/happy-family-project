@@ -46,17 +46,17 @@ public class FamilyService {
         }
     }
 
-    public void loadData(String filename) {
+    public void loadData(String File_Name) {
         Gson gson = new Gson();
 
-        try (FileReader reader = new FileReader(filename)) {
+        try (FileReader reader = new FileReader(File_Name)) {
             Family[] families = gson.fromJson(reader, Family[].class);
 
             familyDao.getAllFamilies().clear();
             for (Family family : families) {
                 familyDao.saveFamily(family);
             }
-            System.out.println("Family data loaded from " + filename);
+            System.out.println("Family data loaded from " + File_Name);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,12 +2,13 @@ package az.edu.turing.happyfamilyv1.dao.entity;
 
 import az.edu.turing.happyfamilyv1.model.Species;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class Pet {
+public abstract class Pet implements Serializable {
 
     private Species species;
     private String nickname;
@@ -15,15 +16,19 @@ public abstract class Pet {
     private int trickLevel;
     private Set<String> habits;
 
-    protected Pet(){
 
+    protected Pet(String nickname) {
+        this.nickname = nickname;
+        this.species = Species.UNKNOWN;
+        habits = new HashSet<>();
     }
 
-    protected Pet(String nickname, int age, int trickLevel, Set<String> habits) {
+    protected Pet(String nickname, Integer age, Integer trickLevel, Set<String> habits) {
         this.nickname = nickname;
         this.age = age;
-        this.trickLevel = trickLevel;
+        setTrickLevel(trickLevel);
         this.habits = new HashSet<>(habits);
+        this.species = Species.UNKNOWN;
     }
 
     protected Pet(Species species, String nickname) {
