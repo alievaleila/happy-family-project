@@ -1,6 +1,8 @@
 package az.edu.turing.happyfamilyv1.service;
 
 import az.edu.turing.happyfamilyv1.dao.FamilyDao;
+import az.edu.turing.happyfamilyv1.dao.entity.Dog;
+import az.edu.turing.happyfamilyv1.dao.entity.DomesticCat;
 import az.edu.turing.happyfamilyv1.dao.entity.Family;
 import az.edu.turing.happyfamilyv1.dao.entity.Human;
 import az.edu.turing.happyfamilyv1.dao.entity.Man;
@@ -8,7 +10,7 @@ import az.edu.turing.happyfamilyv1.dao.entity.Pet;
 import az.edu.turing.happyfamilyv1.dao.entity.Woman;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import com.google.gson.InstanceCreator;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -47,7 +49,9 @@ public class FamilyService {
     }
 
     public void loadData(String File_Name) {
-        Gson gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Pet.class, (InstanceCreator<Pet>) type -> new Dog());
+        Gson gson = gsonBuilder.create();
 
         try (FileReader reader = new FileReader(File_Name)) {
             Family[] families = gson.fromJson(reader, Family[].class);

@@ -10,6 +10,8 @@ import java.util.Set;
 
 public abstract class Pet implements Serializable {
 
+    public Pet() {
+    }
     private Species species;
     private String nickname;
     private int age;

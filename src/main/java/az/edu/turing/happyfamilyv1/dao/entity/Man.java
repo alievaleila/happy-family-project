@@ -25,7 +25,7 @@ public class Man extends Human {
         if (getFamily() != null && !getFamily().getPets().isEmpty()) {
             for (Object obj : getFamily().getPets()) {
                 if (obj instanceof Pet) {
-                    Pet pet = (Pet) obj; // Type casting to Pet
+                    Pet pet = (Pet) obj;
                     System.out.println("Hello, " + pet.getNickname() + "! Time to go for a walk.");
                 }
             }
