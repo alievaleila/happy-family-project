@@ -6,6 +6,9 @@ import java.util.Set;
 
 public class DomesticCat extends Pet implements Foulable {
 
+    public DomesticCat() {
+
+    }
 
     public DomesticCat(String nickname) {
         super(nickname);

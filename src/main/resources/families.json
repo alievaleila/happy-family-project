@@ -3,7 +3,7 @@
     "mother": {
       "name": "Lisa",
       "surname": "Smith",
-      "birthDate": 643147200000,
+      "birthDate": 643143600000,
       "iq": 100
     },
     "father": {
@@ -16,7 +16,7 @@
       {
         "name": "Emily",
         "surname": "Smith",
-        "birthDate": 1428609600000,
+        "birthDate": 1428606000000,
         "iq": 95
       },
       {
@@ -58,7 +58,7 @@
     "father": {
       "name": "John",
       "surname": "Johnson",
-      "birthDate": 651268800000,
+      "birthDate": 651265200000,
       "iq": 115
     },
     "children": [
