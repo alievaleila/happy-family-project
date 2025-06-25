@@ -13,6 +13,7 @@ import az.edu.turing.happyfamilyv1.service.FamilyService;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+//
 public class Main {
 
     public static void main(String[] args) {
@@ -84,5 +85,6 @@ public class Main {
         family2.addPet(cat2);
 
         familyDao.saveFamily(family2);
+
     }
 }
