@@ -1,9 +1,9 @@
-package az.edu.turing.happyfamilyv1.controller;
+package az.edu.turing.happyfamily.controller;
 
-import az.edu.turing.happyfamilyv1.dao.entity.Family;
-import az.edu.turing.happyfamilyv1.service.FamilyService;
-import az.edu.turing.happyfamilyv1.dao.entity.Human;
-import az.edu.turing.happyfamilyv1.dao.entity.Pet;
+import az.edu.turing.happyfamily.dao.entity.Family;
+import az.edu.turing.happyfamily.service.FamilyService;
+import az.edu.turing.happyfamily.dao.entity.Human;
+import az.edu.turing.happyfamily.dao.entity.Pet;
 
 import java.util.List;
 

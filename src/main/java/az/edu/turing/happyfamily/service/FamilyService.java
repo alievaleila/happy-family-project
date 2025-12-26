@@ -1,13 +1,12 @@
-package az.edu.turing.happyfamilyv1.service;
+package az.edu.turing.happyfamily.service;
 
-import az.edu.turing.happyfamilyv1.dao.FamilyDao;
-import az.edu.turing.happyfamilyv1.dao.entity.Dog;
-import az.edu.turing.happyfamilyv1.dao.entity.DomesticCat;
-import az.edu.turing.happyfamilyv1.dao.entity.Family;
-import az.edu.turing.happyfamilyv1.dao.entity.Human;
-import az.edu.turing.happyfamilyv1.dao.entity.Man;
-import az.edu.turing.happyfamilyv1.dao.entity.Pet;
-import az.edu.turing.happyfamilyv1.dao.entity.Woman;
+import az.edu.turing.happyfamily.dao.FamilyDao;
+import az.edu.turing.happyfamily.dao.entity.Dog;
+import az.edu.turing.happyfamily.dao.entity.Family;
+import az.edu.turing.happyfamily.dao.entity.Human;
+import az.edu.turing.happyfamily.dao.entity.Man;
+import az.edu.turing.happyfamily.dao.entity.Pet;
+import az.edu.turing.happyfamily.dao.entity.Woman;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.InstanceCreator;

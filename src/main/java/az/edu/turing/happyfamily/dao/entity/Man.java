@@ -1,4 +1,4 @@
-package az.edu.turing.happyfamilyv1.dao.entity;
+package az.edu.turing.happyfamily.dao.entity;
 
 import java.time.LocalDate;
 

@@ -1,13 +1,13 @@
 package az.edu.turing.service;
 
 
-import az.edu.turing.happyfamilyv1.dao.FamilyDao;
-import az.edu.turing.happyfamilyv1.dao.entity.Family;
-import az.edu.turing.happyfamilyv1.dao.entity.Human;
-import az.edu.turing.happyfamilyv1.dao.entity.Man;
-import az.edu.turing.happyfamilyv1.dao.entity.Woman;
-import az.edu.turing.happyfamilyv1.dao.impl.CollectionFamilyDao;
-import az.edu.turing.happyfamilyv1.service.FamilyService;
+import az.edu.turing.happyfamily.dao.FamilyDao;
+import az.edu.turing.happyfamily.dao.entity.Family;
+import az.edu.turing.happyfamily.dao.entity.Human;
+import az.edu.turing.happyfamily.dao.entity.Man;
+import az.edu.turing.happyfamily.dao.entity.Woman;
+import az.edu.turing.happyfamily.dao.impl.CollectionFamilyDao;
+import az.edu.turing.happyfamily.service.FamilyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

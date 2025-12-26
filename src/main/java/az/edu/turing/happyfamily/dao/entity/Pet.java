@@ -1,6 +1,6 @@
-package az.edu.turing.happyfamilyv1.dao.entity;
+package az.edu.turing.happyfamily.dao.entity;
 
-import az.edu.turing.happyfamilyv1.model.Species;
+import az.edu.turing.happyfamily.model.Species;
 
 import java.io.Serializable;
 import java.util.Arrays;

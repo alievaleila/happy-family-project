@@ -1,7 +1,7 @@
-package az.edu.turing.happyfamilyv1.dao;
+package az.edu.turing.happyfamily.dao;
 
-import az.edu.turing.happyfamilyv1.dao.entity.Family;
-import az.edu.turing.happyfamilyv1.dao.entity.Human;
+import az.edu.turing.happyfamily.dao.entity.Family;
+import az.edu.turing.happyfamily.dao.entity.Human;
 
 import java.util.List;
 

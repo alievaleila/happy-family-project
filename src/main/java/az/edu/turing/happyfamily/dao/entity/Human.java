@@ -1,6 +1,6 @@
-package az.edu.turing.happyfamilyv1.dao.entity;
+package az.edu.turing.happyfamily.dao.entity;
 
-import az.edu.turing.happyfamilyv1.model.DayOfWeek;
+import az.edu.turing.happyfamily.model.DayOfWeek;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;

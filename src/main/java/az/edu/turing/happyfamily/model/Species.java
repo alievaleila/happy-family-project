@@ -1,4 +1,4 @@
-package az.edu.turing.happyfamilyv1.model;
+package az.edu.turing.happyfamily.model;
 
 public enum Species {
     DOG,

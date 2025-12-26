@@ -1,8 +1,8 @@
-package az.edu.turing.happyfamilyv1.dao.impl;
+package az.edu.turing.happyfamily.dao.impl;
 
-import az.edu.turing.happyfamilyv1.dao.entity.Family;
-import az.edu.turing.happyfamilyv1.dao.entity.Human;
-import az.edu.turing.happyfamilyv1.dao.FamilyDao;
+import az.edu.turing.happyfamily.dao.entity.Family;
+import az.edu.turing.happyfamily.dao.entity.Human;
+import az.edu.turing.happyfamily.dao.FamilyDao;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
