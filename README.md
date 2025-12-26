@@ -1,5 +1,3 @@
-Overview
-
 Happy Family is a Java console application demonstrating Object-Oriented Programming (OOP) principles and the DAO (Data Access Object) pattern.
 The application manages family entities using in-memory collections and supports file-based persistence.
 
